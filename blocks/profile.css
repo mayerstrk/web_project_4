@@ -1,0 +1,55 @@
+.profile {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  border
+}
+
+.profile__picture {
+  margin: 0 30px 0 0
+}
+
+.profile__info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile__name-container {
+  display: flex;
+  align-items: flex-end;
+  margin-right: 30px;
+}
+
+.profile__name {
+  margin: 0 18px 0 0;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 1.14;
+  letter-spacing: 0em;
+}
+
+.profile__edit-button {
+  height: 24px;
+  width: 24px;
+  margin-bottom: 8px;
+}
+
+.profile__add-button {
+  margin-left: auto;
+}
+
+.profile__caption {
+  width: fit-content;
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    flex-direction: column;
+  }
+
+  .profile__add-button {
+    margin: 0 auto;
+  }
+}
+
+@medi sceen adn
