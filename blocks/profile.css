@@ -1,4 +1,5 @@
 .profile {
+  margin-top: 40px;
   display: flex;
   width: 100%;
   align-items: center;
@@ -6,18 +7,18 @@
 }
 
 .profile__picture {
-  margin: 0 30px 0 0
+  margin: 0 30px 0 0;
 }
 
 .profile__info {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
+
 .profile__name-container {
   display: flex;
   align-items: flex-end;
-  margin-right: 30px;
+  margin: 0 30px 16px 0;
 }
 
 .profile__name {
@@ -35,21 +36,73 @@
 }
 
 .profile__add-button {
+  display: flex;
+  min-height: 50px;
+  min-width: 150px;
   margin-left: auto;
+  border: 2px solid #FFFFFF;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+
+.profile__add-plus-sign {
+  height: 22px;
+  width: 22px;
+  margin: auto;
 }
 
 .profile__caption {
   width: fit-content;
+  margin: 0;
 }
 
 @media screen and (max-width: 768px) {
   .profile {
+    margin-top: 42px;
     flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .profile__picture {
+    margin: 0 0 30px;
+  }
+
+  .profile__info {
+    align-items: center;
+    margin: 0 0 36px;
+  }
+
+  .profile__name-container {
+    margin: 0 0 14px;
   }
 
   .profile__add-button {
     margin: 0 auto;
+    width: 100%;
+  }
+
+  .profile__add-plus-sign {
+    width: 16px;
+    heightL 16px;
   }
 }
 
-@medi sceen adn
+@media screen and (max-width: 650px) {
+  .profile__name {
+    font-size: 22px;
+    line-height: 27px;
+  }
+
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 3px;
+  }
+
+  .profile__caption {
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  ,
+}
