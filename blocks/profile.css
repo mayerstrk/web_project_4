@@ -1,5 +1,5 @@
 .profile {
-  margin-top: 40px;
+  margin: 40px 0 50px;
   display: flex;
   width: 100%;
   align-items: center;
@@ -33,6 +33,12 @@
   height: 24px;
   width: 24px;
   margin-bottom: 8px;
+  transition: all 0.2s ease-in-out;
+}
+
+.profile__edit-button:hover {
+  opacity: 0.6;
+  cursor: pointer;
 }
 
 .profile__add-button {
@@ -42,7 +48,12 @@
   margin-left: auto;
   border: 2px solid #FFFFFF;
   box-sizing: border-box;
-  border-radius: 2px;
+  transition: all 0.2s ease-in-out;
+}
+
+.profile__add-button:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }
 
 .profile__add-plus-sign {
@@ -58,7 +69,7 @@
 
 @media screen and (max-width: 768px) {
   .profile {
-    margin-top: 42px;
+    margin: 42px 0 36px;
     flex-direction: column;
     justify-content: flex-end;
   }
@@ -78,12 +89,12 @@
 
   .profile__add-button {
     margin: 0 auto;
-    width: 100%;
+    width: 584px;
   }
 
   .profile__add-plus-sign {
     width: 16px;
-    heightL 16px;
+    height: 16px;
   }
 }
 
@@ -104,5 +115,7 @@
     line-height: 17px;
   }
 
-  ,
+  .profile__add-button {
+    width: 100%;
+  }
 }

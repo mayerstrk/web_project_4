@@ -7,13 +7,13 @@
   font-family: "Inter", arial, sans-serif;
   font-style: normal;
   font-size: 18px;
-  line-heihgt: 1.22;
+  line-height: 1.22;
   font-weight: 400;
   color: #fff;
 }
 
-@media screen and (max-width: 768px){
+@media screen and (max-width: 768px) {
   .page {
-    padding: 25px 0 60px;
+    padding: 28px 0 60px;
   }
 }

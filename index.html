@@ -22,7 +22,7 @@
 
       <main class="content">
         <section class="profile">
-          <img src="./images/profile/__picture.svg" alt="Profile picture" class="profile__picture">
+          <img src="./images/profile/__picture.png" alt="Profile picture" class="profile__picture">
           <div class="profile__info">
             <div class="profile__name-container">
               <h1 class="profile__name">Jackes Cousteau</h1>
@@ -34,7 +34,70 @@
           <img src="./images/profile/__add-button.svg" alt="add button" class="profile__add-plus-sign">
           </div>
         </section>
+
+        <div class="places">
+          <div class="card">
+            <img src="./images/card/__photo_item_1.png" alt="Place goes here" class="card__photo">
+            <div class="card__bar">
+              <p class="card__name">Yosemite Valley</p>
+              <div class="card__like-button"></div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="./images/card/__photo_item_2.png" alt="Place goes here" class="card__photo">
+            <div class="card__bar">
+              <p class="card__name">Lake Louise</p>
+              <div class="card__like-button"></div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="./images/card/__photo_item_3.png" alt="Place goes here" class="card__photo">
+            <div class="card__bar">
+              <p class="card__name">Bald Mountains</p>
+              <div class="card__like-button"></div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="./images/card/__photo_item_4.png" alt="Place goes here" class="card__photo">
+            <div class="card__bar">
+              <p class="card__name">Latemar</p>
+              <div class="card__like-button"></div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="./images/card/__photo_item_5.png" alt="Place goes here" class="card__photo">
+            <div class="card__bar">
+              <p class="card__name">Vanoise National Park</p>
+              <div class="card__like-button"></div>
+            </div>
+          </div>
+          <div class="card">
+            <img src="./images/card/__photo_item_6.png" alt="Place goes here" class="card__photo">
+            <div class="card__bar">
+              <p class="card__name">Lago di Braies</p>
+              <div class="card__like-button"></div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <p class="footer__text">© 2021 Around The U.S.</p>
+      </footer>
+    </div>
+
+    <div class="modal-page-overlay">
+      <div class="modal">
+        <img src="./images/modal/__close-button.svg" alt="close button" class="modal__close-button">
+        <h3 class="modal__title">Edit Profile</h3>
+        <form class="form" name="edit-profile">
+          <input type="text" id="input-name" name="name" placeholder="Jackes" class="form__input form__input_type_name">
+          <input type="text" id="input-caption" name="caption" placeholder="Cousteau" class="form__input form__input_type_caption">
+          <button type="submit" class="form__button">Save</button>
+        </form>
       </div>
     </div>
+    
+    <script src="./scripts/modal.js"></script>
   </body>
 </html>
