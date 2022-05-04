@@ -64,9 +64,9 @@
 
 @media screen and (max-width: 600px) {
   .modal {
-  padding: 25px 22px;
+    padding: 25px 22px;
   }
-  
+
   .modal__close-button {
     width: 26px;
     height: 26px;
@@ -79,6 +79,6 @@
   .modal__title {
     margin-bottom: 76px;
     font-size: 18px;
-    line-height: 22px
+    line-height: 22px;
   }
 }

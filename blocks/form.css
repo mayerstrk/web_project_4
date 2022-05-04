@@ -23,7 +23,7 @@
 
 .form__input:focus {
   outline: none;
-  border-bottom: 1px #719ECE solid;
+  border-bottom: 1px #719ece solid;
 }
 
 .form__input-container {
