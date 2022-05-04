@@ -8,12 +8,12 @@ const PROFILE_CAPTION = document.querySelector(".profile__caption")
 let inputName = FORM.querySelector(".form__input_type_name");
 let inputCaption = FORM.querySelector(".form__input_type_caption");
 
+// loads user's profile information into corresponding input values
 function renderProfileInfo() {
-  // loads user's profile information into corresponding input values
   inputName.value = PROFILE_NAME.textContent
   inputCaption.value = PROFILE_CAPTION.textContent
-  
 }
+
 // Toggles modal window visibility and
 // execues renderProfileInfo
 function openEditModal() {
@@ -29,7 +29,6 @@ function closeEditModal() {
 
 
 function handleProfileFormSubmit(evt) {
-
   //Stops browser from submitting form in the default way
   evt.preventDefault(); 
 

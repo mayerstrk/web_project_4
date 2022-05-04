@@ -55,4 +55,9 @@
     width: 100%;
     max-width: none;
   }
+
+  .form__button {
+    margin-top: 16px;
+    padding: 12px;
+  }
 }
