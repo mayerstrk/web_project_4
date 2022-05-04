@@ -13,15 +13,21 @@
 }
 
 .profile__info {
+  margin-right: 30px;
   display: flex;
+  flex: 0 1 auto;
   flex-direction: column;
+  flex-wrap: nowrap;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__name-container {
   display: flex;
   align-items: flex-end;
-  margin: 0 30px 16px 0;
-  max-width: 410px;
+  margin: 0 0 16px;
+  max-width: 100%;
 }
 
 .profile__name {
@@ -106,6 +112,7 @@
     /* bottom marign is 36px - 3px since brief doesn't account for
     profile__caption line height */
     margin: 0 0 33px;
+    max-width: 90%;
   }
 
   .profile__name-container {
@@ -138,14 +145,9 @@
     margin-bottom: 3px;
   }
 
-  .profile__name-container {
-    max-width: 290px;
-  }
-
   .profile__caption {
     font-size: 14px;
     line-height: 17px;
-    max-width: 290px;
   }
 
   .profile__add-button {
