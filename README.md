@@ -29,7 +29,7 @@ It is built using HTML5 CSS and Javascript.
 
 # Github Pages Link:
 
-- [Link to the github pages link](https://solomonbarayev.github.io/web_project_4/)
+- [Link to the github pages link](https://mayerstrk.github.io/web_project_4/)
 
 
 ## Mayer Starkman
