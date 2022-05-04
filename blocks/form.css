@@ -9,6 +9,7 @@
 }
 
 .form__input {
+  box-sizing: border-box;
   padding: 0 7px 9px;
   border-top: 0;
   border-left: 0;
@@ -22,6 +23,7 @@
 
 .form__input:focus {
   outline: none;
+  border-bottom: 1px #719ECE solid;
 }
 
 .form__input-container {

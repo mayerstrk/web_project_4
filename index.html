@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
-    <meta chatset="UTF-8" />
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Prototype for a social media platform for sharing photos" />
     <meta name="author" content="Mayer Starkman" />
@@ -26,59 +26,61 @@
           <div class="profile__info">
             <div class="profile__name-container">
               <h1 class="profile__name">Jackes Cousteau</h1>
-              <img src="./images/profile/__edit-button.svg" alt="edit button" class="profile__edit-button">
+              <button type="button" class="profile__edit-button"></button>
             </div>
           <p class="profile__caption">Explorer</p>
           </div>
-          <div class="profile__add-button">
-          <img src="./images/profile/__add-button.svg" alt="add button" class="profile__add-plus-sign">
-          </div>
+          <button type="button" class="profile__add-button">
+            <img src="./images/profile/__add-button.svg" alt="add button" class="profile__add-plus-sign">
+          </button>
         </section>
 
-        <div class="places">
-          <div class="card">
-            <img src="./images/card/__photo_item_1.png" alt="Place goes here" class="card__photo">
-            <div class="card__bar">
-              <p class="card__name">Yosemite Valley</p>
-              <div class="card__like-button"></div>
-            </div>
-          </div>
-          <div class="card">
-            <img src="./images/card/__photo_item_2.png" alt="Place goes here" class="card__photo">
-            <div class="card__bar">
-              <p class="card__name">Lake Louise</p>
-              <div class="card__like-button"></div>
-            </div>
-          </div>
-          <div class="card">
-            <img src="./images/card/__photo_item_3.png" alt="Place goes here" class="card__photo">
-            <div class="card__bar">
-              <p class="card__name">Bald Mountains</p>
-              <div class="card__like-button"></div>
-            </div>
-          </div>
-          <div class="card">
-            <img src="./images/card/__photo_item_4.png" alt="Place goes here" class="card__photo">
-            <div class="card__bar">
-              <p class="card__name">Latemar</p>
-              <div class="card__like-button"></div>
-            </div>
-          </div>
-          <div class="card">
-            <img src="./images/card/__photo_item_5.png" alt="Place goes here" class="card__photo">
-            <div class="card__bar">
-              <p class="card__name">Vanoise National Park</p>
-              <div class="card__like-button"></div>
-            </div>
-          </div>
-          <div class="card">
-            <img src="./images/card/__photo_item_6.png" alt="Place goes here" class="card__photo">
-            <div class="card__bar">
-              <p class="card__name">Lago di Braies</p>
-              <div class="card__like-button"></div>
-            </div>
-          </div>
-        </div>
+        <section class="places">
+          <ul class="places__cards">
+            <li class="card">
+              <img src="./images/card/__photo_item_1.png" alt="Place goes here" class="card__photo">
+              <div class="card__bar">
+                <h2 class="card__name">Yosemite Valley</h2>
+                <button type="button" class="card__like-button"></button>
+              </div>
+            </li>
+            <li class="card">
+              <img src="./images/card/__photo_item_2.png" alt="Place goes here" class="card__photo">
+              <div class="card__bar">
+                <h2 class="card__name">Lake Louise</h2>
+                <button type="button" class="card__like-button"></button>
+              </div>
+            </li>
+            <li class="card">
+              <img src="./images/card/__photo_item_3.png" alt="Place goes here" class="card__photo">
+              <div class="card__bar">
+                <h2 class="card__name">Bald Mountains</h2>
+                <button type="button" class="card__like-button"></button>
+              </div>
+            </li>
+            <li class="card">
+              <img src="./images/card/__photo_item_4.png" alt="Place goes here" class="card__photo">
+              <div class="card__bar">
+                <h2 class="card__name">Latemar</h2>
+                <button type="button" class="card__like-button"></button>
+              </div>
+            </li>
+            <li class="card">
+              <img src="./images/card/__photo_item_5.png" alt="Place goes here" class="card__photo">
+              <div class="card__bar">
+                <h2 class="card__name">Vanoise National Park</h2>
+                <button type="button" class="card__like-button"></button>
+              </div>
+            </li>
+            <li class="card">
+              <img src="./images/card/__photo_item_6.png" alt="Place goes here" class="card__photo">
+              <div class="card__bar">
+                <h2 class="card__name">Lago di Braies</h2>
+                <button type="button" class="card__like-button"></button>
+              </div>
+            </li>
+          </ul>
+        </section>
       </main>
 
       <footer class="footer">
@@ -86,7 +88,7 @@
       </footer>
     </div>
 
-    <div class="modal-page-overlay">
+    <div class="modal__page-overlay">
       <div class="modal">
         <img src="./images/modal/__close-button.svg" alt="close button" class="modal__close-button">
         <h3 class="modal__title">Edit Profile</h3>

@@ -1,4 +1,4 @@
-.modal-page-overlay {
+.modal__page-overlay {
   position: fixed;
   width: 100%;
   height: 100vh;
@@ -9,16 +9,16 @@
   visibility: hidden;
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  transition: all 0.45s ease-in-out;
 }
 
-.modal-page-overlay_visible {
+.modal__page-overlay_visible {
   display: flex;
   justify-content: center;
   align-items: center;
   visibility: visible;
   opacity: 1;
 }
+
 .modal {
   position: relative;
   box-sizing: border-box;
@@ -37,9 +37,15 @@
   position: absolute;
   top: -40px;
   right: -40px;
-  transition: all 0.2s ease-out;
+  transition: opacity 0.2s ease-out;
   width: 40px;
-  transition: all 0.2s ease-in-out;
+  height: 40px;
+  background: url(../images/modal/__close-button.svg);
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  box-sizing: border-box;
 }
 
 .modal__close-button:hover {
@@ -61,6 +67,6 @@
     width: 26px;
     height: 26px;
     right: 0;
-    top: -54px;
+    top: -39px;
   }
 }

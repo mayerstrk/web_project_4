@@ -3,11 +3,13 @@
   display: flex;
   width: 100%;
   align-items: center;
-  border
 }
 
 .profile__picture {
   margin: 0 30px 0 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
 }
 
 .profile__info {
@@ -34,6 +36,13 @@
   width: 24px;
   margin-bottom: 8px;
   transition: all 0.2s ease-in-out;
+  background: url("../images/profile/__edit-button.svg");
+  border: none;
+  background-size: contain;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
 }
 
 .profile__edit-button:hover {
@@ -49,6 +58,12 @@
   border: 2px solid #FFFFFF;
   box-sizing: border-box;
   transition: all 0.2s ease-in-out;
+  border-radius: 2px;
+  background-size: contain;
+  background-color: transparent;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
 }
 
 .profile__add-button:hover {
@@ -80,11 +95,16 @@
 
   .profile__info {
     align-items: center;
-    margin: 0 0 36px;
+    /* bottom marign is 36px - 3px since brief doesn't account for
+    profile__caption line height */
+    margin: 0 0 33px;
   }
 
   .profile__name-container {
-    margin: 0 0 14px;
+    /* bottom marign is 14px - 5px since brief doesn't account for
+    line height. The height of profile block is now 286 and 
+    conforms to the brief. */
+    margin: 0 0 9px;
   }
 
   .profile__add-button {
