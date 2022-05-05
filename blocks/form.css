@@ -1,5 +1,5 @@
 .form {
-  max-width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 30px;
@@ -51,11 +51,6 @@
 }
 
 @media screen and (max-width: 524px) {
-  .form {
-    width: 100%;
-    max-width: none;
-  }
-
   .form__button {
     margin-top: 16px;
     padding: 12px;
