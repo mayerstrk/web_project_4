@@ -1,4 +1,3 @@
-const cardTemplate = document.querySelector("#card").content;
 const cardModal = document.querySelector(".modal_type_card");
 
 
@@ -17,6 +16,7 @@ function renderCardModalValues(evt) {
   cardModalPhotoCaption.textContent = captionText;
 };
 
+
 // Renders the card modal window with the appropiate values
 const renderCardModal = evt => {
   // Gets appropiate values
@@ -24,6 +24,7 @@ const renderCardModal = evt => {
   // Calls the openModal function from modal_functions.js to toggle modal window visibility
   openModal(cardModal)
 };
+
 
 // Queries the card modal close button and adds the event listener
 const cardModalCloseButton = cardModal.querySelector(".modal__close-button_for_card-modal");

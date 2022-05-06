@@ -26,6 +26,10 @@ const initialCards = [
 ];
 
 
+const placesCards = document.querySelector(".places__cards");
+const cardTemplate = document.querySelector("#card").content;
+
+
 // Deletes a card using the remove method
 const deleteCard = evt => evt.target.closest(".card").remove();
 
@@ -64,7 +68,6 @@ function createCard(card) {
 
 function renderCard(card) {
   // Adds the card elment to the DOM
-  placesCards = document.querySelector(".places__cards");
   placesCards.prepend(createCard(card));
 }
 
