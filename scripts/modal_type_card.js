@@ -2,18 +2,18 @@ const cardTemplate = document.querySelector("#card").content;
 const cardModal = document.querySelector(".modal_type_card");
 
 
-//Gets the values for the card modal depending on which picture is clicked
+// Gets the values for the card modal depending on which picture is clicked
 function renderCardModalValues(evt) {
   // Gets relevant values from the card's elements to assign them to the modal window's elements
   const srcValue = evt.target.closest(".card__photo").getAttribute("src");
   const captionText = evt.target.parentElement.nextElementSibling.firstElementChild.textContent;
 
   // Assigns the values to their corresponding elements in the modal window
-  cardModalPhoto = cardModal.querySelector(".card-modal__photo");
+  const cardModalPhoto = cardModal.querySelector(".card-modal__photo");
   cardModalPhoto.setAttribute("src", srcValue);
   cardModalPhoto.setAttribute("alt", `Photo of ${captionText}`)
 
-  cardModalPhotoCaption = cardModal.querySelector(".card-modal__photo-caption");
+  const cardModalPhotoCaption = cardModal.querySelector(".card-modal__photo-caption");
   cardModalPhotoCaption.textContent = captionText;
 };
 
@@ -21,6 +21,10 @@ function renderCardModalValues(evt) {
 const renderCardModal = evt => {
   // Gets appropiate values
   renderCardModalValues(evt)
-  //calls the openModal function from modal_functions.js to toggle modal window visibility
+  // Calls the openModal function from modal_functions.js to toggle modal window visibility
   openModal(cardModal)
 };
+
+// Queries the card modal close button and adds the event listener
+const cardModalCloseButton = cardModal.querySelector(".modal__close-button_for_card-modal");
+cardModalCloseButton.addEventListener("click", () => closeModal(cardModal));

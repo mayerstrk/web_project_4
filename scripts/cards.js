@@ -26,8 +26,11 @@ const initialCards = [
 ];
 
 
+// Deletes a card using the remove method
 const deleteCard = evt => evt.target.closest(".card").remove();
 
+
+// Toggles the state of the like button
 const toggleLikeState = evt => evt.target.classList.toggle("card__like-button_active")
 
 
@@ -47,19 +50,17 @@ function createCard(card) {
 
   // Adds event listeners to the cards buttons
   // + like button
-  cardLikeButton = cardElement.querySelector(".card__like-button");
+  const cardLikeButton = cardElement.querySelector(".card__like-button");
   cardLikeButton.addEventListener("click", toggleLikeState);
   // + delete button
-  cardDeleteButton = cardElement.querySelector(".card__delete-button");
+  const cardDeleteButton = cardElement.querySelector(".card__delete-button");
   cardDeleteButton.addEventListener("click", deleteCard);
 
-  // Adds event listener for the card photo and close button on the modal
+  // Adds event listener for the card photo
   cardPhoto.addEventListener("click", renderCardModal);
-  cardModalCloseButton = cardModal.querySelector(".modal__close-button_for_card-modal");
-  cardModalCloseButton.addEventListener("click", () => closeModal(cardModal));
-  
   return cardElement
 }
+
 
 function renderCard(card) {
   // Adds the card elment to the DOM
@@ -68,4 +69,5 @@ function renderCard(card) {
 }
 
 
+// iterates through obkects in initialCads array and renders a card fot each one
 initialCards.forEach(card => renderCard(card));
