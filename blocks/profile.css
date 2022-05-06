@@ -70,7 +70,6 @@
   background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
-  box-sizing: border-box;
 }
 
 .profile__add-button:hover {
