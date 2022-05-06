@@ -72,5 +72,5 @@ function renderCard(card) {
 }
 
 
-// iterates through obkects in initialCads array and renders a card fot each one
+// Iterates through objects in initialCads array and renders a card fot each one
 initialCards.forEach(card => renderCard(card));
