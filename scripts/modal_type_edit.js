@@ -14,8 +14,9 @@ function renderProfileInfo() {
   inputCaption.value = profileCaption.textContent
 };
 
+
 // Loads relevant information into input values and toggle the modal window visibility
-const renderEditForm = () => {
+function renderEditForm() {
   renderProfileInfo()
   openModal(editProfileModal);
 };
