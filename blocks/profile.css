@@ -17,9 +17,6 @@
   display: flex;
   flex: 0 1 auto;
   flex-direction: column;
-  flex-wrap: nowrap;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   overflow: hidden;
 }
 

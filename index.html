@@ -37,48 +37,18 @@
 
         <section class="places">
           <ul class="places__cards">
-            <li class="card">
-              <img src="./images/card/__photo_item_1.png" alt="Place goes here" class="card__photo">
-              <div class="card__bar">
-                <h2 class="card__name">Yosemite Valley</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/card/__photo_item_2.png" alt="Place goes here" class="card__photo">
-              <div class="card__bar">
-                <h2 class="card__name">Lake Louise</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/card/__photo_item_3.png" alt="Place goes here" class="card__photo">
-              <div class="card__bar">
-                <h2 class="card__name">Bald Mountains</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/card/__photo_item_4.png" alt="Place goes here" class="card__photo">
-              <div class="card__bar">
-                <h2 class="card__name">Latemar</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/card/__photo_item_5.png" alt="Place goes here" class="card__photo">
-              <div class="card__bar">
-                <h2 class="card__name">Vanoise National Park</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
-            <li class="card">
-              <img src="./images/card/__photo_item_6.png" alt="Place goes here" class="card__photo">
-              <div class="card__bar">
-                <h2 class="card__name">Lago di Braies</h2>
-                <button type="button" class="card__like-button"></button>
-              </div>
-            </li>
+            <template id="card">
+              <li class="card">
+                <div class="card__photo-container">
+                  <img alt="Place goes here" class="card__photo">
+                  <button type="button" class="card__delete-button"></button>
+                </div>
+                <div class="card__bar">
+                  <h2 class="card__name"></h2>
+                  <button type="button" class="card__like-button"></button>
+                </div>
+              </li>
+            </template>
           </ul>
         </section>
       </main>
@@ -88,10 +58,9 @@
       </footer>
     </div>
 
-    <div class="modal">
-      <div class="modal__form">
-        <!-- Alex please review all my projects -->
-        <button type="button" class="modal__close-button"></button>
+    <div class="modal modal_type_edit">
+      <div class="modal__form modal__form_type_edit">
+        <button type="button" class="modal__close-button modal__close-button_for_edit-form"></button>
         <h3 class="modal__title">Edit Profile</h3>
         <form class="form" name="edit-profile">
           <input type="text" id="input-name" name="name" placeholder="Jackes Cousteau" class="form__input form__input_type_name" required>
@@ -100,7 +69,35 @@
         </form>
       </div>
     </div>
+
+    <div class="modal modal_type_add">
+      <div class="modal__form modal__form_type_add">
+        <button type="button" class="modal__close-button modal__close-button_for_add-form"></button>
+        <h3 class="modal__title">New Place</h3>
+        <form class="form" name="edit-profile">
+          <input type="text" id="input-title" name="title" placeholder="Title" class="form__input form__input_type_title" required>
+          <input type="text" id="input-url" name="url" placeholder="Image URL" class="form__input form__input_type_url" required>
+          <button type="submit" class="form__button">Create</button>
+        </form>
+      </div>
+    </div>
+
+      <div class="modal modal_type_photo">
+        <div class="card-modal__content">
+          <div class="card-modal__photo-container">
+            <button type="button" class="modal__close-button modal__close-button_for_card-modal"></button>
+            <img alt="Place goes here" class="card-modal__photo"/>
+          </div>
+          <h2 class="card-modal__photo-caption"></h2>
+        </div>
+      </div>
     
-    <script src="./scripts/modal.js"></script>
+    
+    <script src="./scripts/modal_type_edit.js"></script>
+    <script src="./scripts/modal_type_add.js"></script>
+    <script src="./scripts/modal_type_card.js"></script>
+    <script src="./scripts/cards.js"></script>
+
+
   </body>
 </html>

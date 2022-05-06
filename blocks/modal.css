@@ -5,16 +5,16 @@
   min-width: 320px;
   top: 0;
   left: 0;
-  display: none;
-  visibility: hidden;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
-.modal_visible {
   display: flex;
   justify-content: center;
   align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  transition: visibility 0.2s, opacity 0.2s linear;
+}
+
+.modal_visible {
   visibility: visible;
   opacity: 1;
 }
