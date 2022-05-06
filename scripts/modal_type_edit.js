@@ -1,18 +1,24 @@
-const modalTypeEdit = document.querySelector(".modal_type_edit");
-const formTypeEdit = document.querySelector(".form");
-const editBtn = document.querySelector(".profile__edit-button")
-const closeBtnforEdit = modalTypeEdit.querySelector(".modal__close-button_for_edit-form");
+const editProfileModal = document.querySelector(".modal_type_edit");
+const formWindowTypeEdit = document.querySelector(".form_type_edit");
+const editButton = document.querySelector(".profile__edit-button")
+const closeButtionforEdit = editProfileModal.querySelector(".modal__close-button_for_edit-form");
 const profileName = document.querySelector(".profile__name")
 const profileCaption = document.querySelector(".profile__caption")
-const inputName = formTypeEdit.querySelector(".form__input_type_name");
-const inputCaption = formTypeEdit.querySelector(".form__input_type_caption");
+const inputName = formWindowTypeEdit.querySelector(".form__input_type_name");
+const inputCaption = formWindowTypeEdit.querySelector(".form__input_type_caption");
 
 
 // loads user's profile information into corresponding input values
 function renderProfileInfo() {
   inputName.value = profileName.textContent
   inputCaption.value = profileCaption.textContent
-}
+};
+
+// Loads relevant information into input values and toggle the modal window visibility
+const renderEditForm = () => {
+  renderProfileInfo()
+  openModal(editProfileModal);
+};
 
 
 function handleProfileFormSubmit(evt) {
@@ -29,14 +35,14 @@ function handleProfileFormSubmit(evt) {
   inputCaption.placeholder = `${inputCaption.value}`;
 
   //Closes modal window
-  closeModal(modalTypeEdit);
+  closeModal(editProfileModal);
 }
 
 
 // Toggles modal windo visibility when buttons are clicked
 // and loads profile info on modal open
-editBtn.addEventListener("click", () => openModal(modalTypeEdit));
-closeBtnforEdit .addEventListener("click", () => closeModal(modalTypeEdit));
+editButton.addEventListener("click", renderEditForm);
+closeButtionforEdit .addEventListener("click", () => closeModal(editProfileModal));
 
 // Saves changes after form is filled and submitted
-formTypeEdit.addEventListener("submit", handleProfileFormSubmit);
+formWindowTypeEdit.addEventListener("submit", handleProfileFormSubmit);

@@ -40,7 +40,7 @@ function createCard(card) {
   //  + Card img source
   const cardPhoto = cardElement.querySelector(".card__photo");
   cardPhoto.setAttribute("src", card.link);
-  cardPhoto.setAttribute("alt", "Place goes here");
+  cardPhoto.setAttribute("alt", `photo of ${card.name}`);
   //  + Card name
   const cardName = cardElement.querySelector(".card__name");
   cardName.textContent = card.name;
@@ -63,7 +63,8 @@ function createCard(card) {
 
 function renderCard(card) {
   // Adds the card elment to the DOM
-  document.querySelector(".places__cards").prepend(createCard(card));
+  placesCards = document.querySelector(".places__cards");
+  placesCards.prepend(createCard(card));
 }
 
 
