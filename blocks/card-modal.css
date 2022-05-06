@@ -6,7 +6,6 @@
   max-width: 75vw;
   max-height: 75vh;
   min-width: 240px;
-
 }
 
 .card-modal__photo-container {
@@ -27,10 +26,10 @@
 .card-modal__photo-caption {
   margin: 0;
   width: fit-content;
-  font-family: 'Inter';
+  font-family: "Inter";
   font-style: normal;
-  font-weight: 400; 
+  font-weight: 400;
   font-size: 12px;
   line-height: 15px;
-  color: #FFFFFF;
+  color: #ffffff;
 }
