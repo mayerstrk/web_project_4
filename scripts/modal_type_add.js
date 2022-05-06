@@ -1,19 +1,10 @@
-const MODAL_TYPE_ADD = document.querySelector(".modal_type_add");
-const FORM_TYPE_ADD = document.querySelector(".modal__form_type_add")
-const ADD_BTN = document.querySelector(".profile__add-button")
-const CLOSE_BTN_FOR_ADD = MODAL_TYPE_ADD.querySelector(".modal__close-button_for_add-form");
-const INPUT_TITLE = FORM_TYPE_ADD.querySelector(".form__input_type_title");
-const INPUT_URL = FORM_TYPE_ADD.querySelector(".form__input_type_url")
+const modalTypeAdd = document.querySelector(".modal_type_add");
+const formTypeAdd = document.querySelector(".modal__form_type_add")
+const addBtn = document.querySelector(".profile__add-button")
+const closeBtnForAdd = modalTypeAdd.querySelector(".modal__close-button_for_add-form");
+const inputTitle = formTypeAdd.querySelector(".form__input_type_title");
+const inputURL = formTypeAdd.querySelector(".form__input_type_url")
 
-// Toggles add modal visibility
-function openAddModal() {
-  MODAL_TYPE_ADD.classList.add("modal_visible")
-}
-
-// Toggles add modal visibility
-function closeAddModal() {
-  MODAL_TYPE_ADD.classList.remove("modal_visible")
-}
 
 // 1. creates a card object
 // 2. creates a card element
@@ -25,28 +16,29 @@ function handleAddSubmit(evt) {
 
   // 1.
   // Creates card abjects with name and link properties according to user input
-  const CARD_OBJECT = {
-    name: INPUT_TITLE.value,
-    link: INPUT_URL.value
+  const cardObject = {
+    name: inputTitle.value,
+    link: inputURL.value
   }
 
   // 2.
-  // calls the createCard function from cards.js to create a card element on for submit
-  craeateCard(CARD_OBJECT)
+  // calls the renderCard function from cards.js to create a card element on form submit
+  renderCard(cardObject)
+  
 
   // 3.
   // closes modal after card is added
-  closeAddModal();
+  closeModal(modalTypeAdd);
 
   // 4.
   // resets input values
-  INPUT_TITLE.value = "";
-  INPUT_URL.value = "";
+  inputTitle.value = ""; 
+  inputURL.value = ""; 
 }
 
 // Adds event listeners for the add button and the close button in the modal
-ADD_BTN.addEventListener("click", openAddModal);
-CLOSE_BTN_FOR_ADD.addEventListener("click", closeAddModal);
+addBtn.addEventListener("click", () => openModal(modalTypeAdd));
+closeBtnForAdd.addEventListener("click", () => closeModal(modalTypeAdd));
 
 // Specifies submit handler for the modal form
-FORM_TYPE_ADD.addEventListener("submit", handleAddSubmit);
+formTypeAdd.addEventListener("submit", handleAddSubmit);

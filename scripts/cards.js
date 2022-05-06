@@ -26,34 +26,45 @@ const initialCards = [
 ];
 
 
-let deleteCard = evt => evt.target.closest(".card").remove()
+const deleteCard = evt => evt.target.closest(".card").remove();
+
+const toggleLikeState = evt => evt.target.classList.toggle("card__like-button_active")
 
 
-function craeateCard(card) {
+function createCard(card) {
   // Clones the card template content into new card element
-  const CARD_ELEMENT = CARD_TEMPLATE.querySelector(".card").cloneNode(true);
+  const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
 
   // Assigns the object's values to corresponding card components:
   //  + Card img source
-  CARD_ELEMENT.querySelector(".card__photo").setAttribute("src", card.link);
+  const cardPhoto = cardElement.querySelector(".card__photo");
+  cardPhoto.setAttribute("src", card.link);
+  cardPhoto.setAttribute("alt", "Place goes here");
   //  + Card name
-  CARD_ELEMENT.querySelector(".card__name").textContent = card.name;
+  const cardName = cardElement.querySelector(".card__name");
+  cardName.textContent = card.name;
 
   // Adds event listeners to the cards buttons
   // + like button
-  CARD_ELEMENT.querySelector(".card__like-button").addEventListener("click", 
-    evt => evt.target.classList.toggle("card__like-button_active"));
+  cardLikeButton = cardElement.querySelector(".card__like-button");
+  cardLikeButton.addEventListener("click", toggleLikeState);
   // + delete button
-  CARD_ELEMENT.querySelector(".card__delete-button").addEventListener("click", deleteCard);
+  cardDeleteButton = cardElement.querySelector(".card__delete-button");
+  cardDeleteButton.addEventListener("click", deleteCard);
 
   // Adds event listener for the card photo and close button on the modal
-  CARD_ELEMENT.querySelector(".card__photo").addEventListener("click", OPEN_CARD_MODAL);
-  CARD_MODAL.querySelector(".modal__close-button_for_card-modal").addEventListener("click", CLOSE_CARD_MODAL)
+  cardPhoto.addEventListener("click", renderCardModal);
+  cardModalCloseButton = cardModal.querySelector(".modal__close-button_for_card-modal");
+  cardModalCloseButton.addEventListener("click", () => closeModal(cardModal));
   
+  return cardElement
+}
+
+function renderCard(card) {
   // Adds the card elment to the DOM
-  document.querySelector(".places__cards").prepend(CARD_ELEMENT)
+  document.querySelector(".places__cards").prepend(createCard(card));
 }
 
 
-initialCards.forEach( card => craeateCard(card) );
+initialCards.forEach(card => renderCard(card));
