@@ -1,4 +1,4 @@
-# Project 4: Around The U.S.
+# Project 5: Around The U.S.
 
 
 ### Overview
@@ -15,6 +15,9 @@ It is built using HTML5 CSS and Javascript.
 ### Project features
 
 - The ability to edit profile name
+- Add custom cards
+- Delete cards
+- Open image on click
 
   *more on the way*
 
