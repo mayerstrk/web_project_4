@@ -37,35 +37,43 @@ const deleteCard = evt => evt.target.closest(".card").remove();
 // Toggles the state of the like button
 const toggleLikeState = evt => evt.target.classList.toggle("card__like-button_active")
 
-
+/**
+ * Creates a card element
+ * @param {Object} card - Object containing the cards properties.
+ * @param {string} card.name - Name of the place in the card.
+ * @param {string} card.link - Link to the place photo
+ */
 function createCard(card) {
   // Clones the card template content into new card element
   const cardElement = cardTemplate.querySelector(".card").cloneNode(true);
 
+  const cardPhoto = cardElement.querySelector(".card__photo");
+  const cardName = cardElement.querySelector(".card__name");
+  const cardLikeButton = cardElement.querySelector(".card__like-button");
+  const cardDeleteButton = cardElement.querySelector(".card__delete-button");
 
   // Assigns the object's values to corresponding card components:
-  //  + Card img source
-  const cardPhoto = cardElement.querySelector(".card__photo");
   cardPhoto.setAttribute("src", card.link);
   cardPhoto.setAttribute("alt", `photo of ${card.name}`);
-  //  + Card name
-  const cardName = cardElement.querySelector(".card__name");
   cardName.textContent = card.name;
 
   // Adds event listeners to the cards buttons
-  // + like button
-  const cardLikeButton = cardElement.querySelector(".card__like-button");
   cardLikeButton.addEventListener("click", toggleLikeState);
-  // + delete button
-  const cardDeleteButton = cardElement.querySelector(".card__delete-button");
   cardDeleteButton.addEventListener("click", deleteCard);
 
   // Adds event listener for the card photo
   cardPhoto.addEventListener("click", renderCardModal);
+
   return cardElement
 }
 
-
+/**
+ * Creates a card element and prepends it to 
+ * the placesCards container adding it to the DOM
+ * @param {Object} card - Object containing the cards properties.
+ * @param {string} card.name - Name of the place in the card.
+ * @param {string} card.link - Link to the place photo
+ */
 function renderCard(card) {
   // Adds the card elment to the DOM
   placesCards.prepend(createCard(card));

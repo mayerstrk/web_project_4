@@ -8,40 +8,49 @@ const inputName = formWindowTypeEdit.querySelector(".form__input_type_name");
 const inputCaption = formWindowTypeEdit.querySelector(".form__input_type_caption");
 
 
-// loads user's profile information into corresponding input values
+/**
+ * Loads user's profile information into corresponding input values
+ */
 function renderProfileInfo() {
   inputName.value = profileName.textContent
   inputCaption.value = profileCaption.textContent
 };
 
 
-// Loads relevant information into input values and toggle the modal window visibility
+/**
+ * Loads relevant information into input values and toggle the modal window visibility
+ */
 function renderEditForm() {
   renderProfileInfo()
   openModal(editProfileModal);
 };
 
-
+/**
+ * 1. Applies changes submitted by user
+ * 2. Sets valie of input field's placeholder attribute to current state
+ * 3. Closes modal window
+ * @param {Event} evt 
+ */
 function handleProfileFormSubmit(evt) {
   //Stops browser from submitting form in the default way
   evt.preventDefault(); 
 
-  // Applies changes 
+  // 1. Applies changes made by user
   profileName.textContent = `${inputName.value}`;
   profileCaption.textContent = `${inputCaption.value}`;
 
-  // Sets value of input field's placeholder attribute to
-  // current state
+  /* 2. Sets value of input field's placeholder attribute to
+        current state */
   inputName.placeholder = `${inputName.value}`;
   inputCaption.placeholder = `${inputCaption.value}`;
 
-  //Closes modal window
+  // 3. Closes modal window
   closeModal(editProfileModal);
 }
 
 
-// Toggles modal windo visibility when buttons are clicked
-// and loads profile info on modal open
+/*Toggles modal windo visibility when buttons are clicked
+  and loads profile info on modal open */ 
 editButton.addEventListener("click", renderEditForm);
 closeButtionforEdit .addEventListener("click", () => closeModal(editProfileModal));
 
