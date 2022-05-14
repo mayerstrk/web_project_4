@@ -33,5 +33,5 @@ const renderCardModal = evt => {
   // 1 Gets appropiate values
   getCardModalValues(evt)
   // 2 Calls the openModal function from modal_functions.js to toggle modal window visibility
-  initModal(cardModal)
+  openModal(cardModal)
 };

@@ -6,6 +6,7 @@ const config = {
   submitButtonSelector: ".form__button",
   inactiveButtonClass: "form__button_disabled",
   errorClass: "form__error",
+  errorSelector: ".form__error",
   errorActiveClass: "form__error_visible",
 };
 
@@ -19,6 +20,7 @@ function closeOrReset() {
   }
 }
 
+
 /**
  * Toggles modal window visibility
  * @param {Element} modal - modal window node to make visible
@@ -26,12 +28,10 @@ function closeOrReset() {
 function openModal(modal) {
   modal.classList.add("modal_visible");
   document.addEventListener("keydown", closeWithEsc);
-  modal.addEventListener("mousedown", (evt) => closeOnClickOut(evt, modal))
+  modal.addEventListener("mousedown", closeOnClickOut);
+  modal.querySelector(".modal__close-button").addEventListener("click", handleCloseButton)
 }
 
-function initModal(modal) {
-  openModal(modal);
-}
 
 /**
  * Toggles modal window visibility
@@ -48,20 +48,18 @@ function resetModal(modal) {
   resetValidation(modal);
 }
 
-function addCloseButtonListener(modal) {
-  closeButton = modal.querySelector(".modal__close-button");
-  closeButton.addEventListener("click", () => resetModal(modal));
+function handleCloseButton(modal) {
+  closeOrReset();
 }
 
-function closeOnClickOut(evt, modal) {
-  const modalWindow = modal.querySelector(".modal__window");
-  if (!modalWindow.contains(evt.target)) {
+function closeOnClickOut(evt) {
+  if (!(evt.target.closest(".modal__window") || evt.target === ".modal__window")) {
     closeOrReset();
   }
 }
 
 function closeWithEsc(evt) {
   if (evt.key === "Escape") {
-  closeOrReset();
+    closeOrReset();
   }
 }

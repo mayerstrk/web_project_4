@@ -10,11 +10,14 @@ placesCards.addEventListener("click", (evt) => {
     deleteCard(evt);
   } else if (evt.target.classList.contains("card__photo")) {
     renderCardModal(evt);
-  } else {}
+  } else {
+  }
 });
+
+getProfileCurrentStates();
 
 addEditEventListeners();
 
 addAddEventListeners();
 
-enableValidation(config)
+enableValidation();

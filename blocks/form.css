@@ -78,11 +78,11 @@ opacity: 0;
   opacity: 0.8;
 }
 
-.form__button_inactive {
+.form__button_disabled {
   opacity: 0.2;
   color: #000;
-  background: transparent;.
-  border: 1px solid #000;
+  background: transparent;
+  border: #000 1px solid;
   cursor: default;
 }
 

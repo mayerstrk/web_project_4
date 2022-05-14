@@ -43,20 +43,15 @@ const sameState = (inputElements, inputValues) => {
   });
 };
 
-const toggleButtonState = (
-  inputElements,
-  currentStates,
-  inputStates,
-  buttonElement
-) => {
+const toggleButtonState = (inputElements, buttonElement, currentStates = 0, inputStates = 0) => {
   // If there is at least one invalid input
   if (hasInvalidInput(inputElements) || sameState(currentStates, inputStates)) {
     // make the button inactive
-    buttonElement.classList.add("form__button_inactive");
+    buttonElement.classList.add(config.inactiveButtonClass);
     buttonElement.disabled = true;
   } else {
     // otherwise, make it active
-    buttonElement.classList.remove("form__button_inactive");
+    buttonElement.classList.remove(config.inactiveButtonClass);
     buttonElement.disabled = false;
   }
 };
@@ -86,22 +81,18 @@ function setEventListeners(inputElements, buttonElement) {
 
 function enableValidation(config) {
   forms.forEach((form) => {
-    const inputElements = Array.from(form.querySelectorAll(".form__input"));
-    const buttonElement = form.querySelector(".form__button");
-    buttonElement.classList.add("form__button_inactive");
-    buttonElement.disabled = true;
+    const inputElements = Array.from(form.querySelectorAll(config.inputSelector));
+    const buttonElement = form.querySelector(config.submitButtonSelector);
     setEventListeners(inputElements, buttonElement);
   });
 }
 
 function resetValidation(modal) {
+  modalForm.reset();
   const modalForm = modal.querySelector(config.formSelector);
-  const buttonElement = modalForm.querySelector(".form__button");
-  buttonElement.classList.add("form__button_inactive");
-  const inputElements = Array.from(modalForm.querySelectorAll(".form__input"));
+  const inputElements = Array.from(modalForm.querySelectorAll(config.inputSelector));
   inputElements.forEach((inputElement) => {
-    const inputError = inputElement.parentElement.querySelector(".form__error");
+    const inputError = inputElement.parentElement.querySelector(config.errorSelector);
     hideInputError(inputElement, inputError);
   });
-  modalForm.reset();
 }
