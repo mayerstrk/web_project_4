@@ -37,62 +37,92 @@ const hasInvalidInput = (inputElements) => {
   });
 };
 
-const sameState = (inputElements, inputValues) => {
-  return inputValues.every((value) => {
-    return inputElements.includes(value);
-  });
+const haveSameState = (inputElements, inputValues) => {
+  if (inputElements && inputValues) {
+    return inputValues.every((value) => {
+      return inputElements.includes(value);
+    });
+  }
 };
 
-const toggleButtonState = (inputElements, buttonElement, currentStates = 0, inputStates = 0) => {
+const disableButton = (button) => {
+  button.disabled = true;
+  button.classList.add(config.inactiveButtonClass);
+};
+
+const enableButton = (button) => {
+  button.disabled = false;
+  button.classList.remove(config.inactiveButtonClass);
+};
+
+const toggleButtonState = (
+  inputElements,
+  buttonElement,
+  currentStates,
+  inputStates
+) => {
   // If there is at least one invalid input
-  if (hasInvalidInput(inputElements) || sameState(currentStates, inputStates)) {
+  if (
+    hasInvalidInput(inputElements) ||
+    haveSameState(currentStates, inputStates)
+  ) {
     // make the button inactive
-    buttonElement.classList.add(config.inactiveButtonClass);
-    buttonElement.disabled = true;
+    disableButton(buttonElement);
   } else {
     // otherwise, make it active
-    buttonElement.classList.remove(config.inactiveButtonClass);
-    buttonElement.disabled = false;
+    enableButton(buttonElement);
   }
 };
 
 function setEventListeners(inputElements, buttonElement) {
   inputElements.forEach((inputElement) => {
-    const currentStates = [];
-    let inputStates = [];
-    inputElements.forEach((inputElement) =>
-      currentStates.push(inputElement.value)
-    );
     inputElement.addEventListener("input", () => {
       isValid(inputElement);
-      inputStates = [];
+      getProfileCurrentStates();
+      const inputStates = [];
       inputElements.forEach((inputElement) =>
         inputStates.push(inputElement.value)
       );
       toggleButtonState(
         inputElements,
-        currentStates,
-        inputStates,
-        buttonElement
+        buttonElement,
+        profileCurrentStates,
+        inputStates
       );
     });
   });
 }
 
-function enableValidation(config) {
+function enableValidation() {
   forms.forEach((form) => {
-    const inputElements = Array.from(form.querySelectorAll(config.inputSelector));
+    const inputElements = Array.from(
+      form.querySelectorAll(config.inputSelector)
+    );
     const buttonElement = form.querySelector(config.submitButtonSelector);
+    disableButton(buttonElement);
     setEventListeners(inputElements, buttonElement);
   });
 }
 
 function resetValidation(modal) {
-  modalForm.reset();
   const modalForm = modal.querySelector(config.formSelector);
-  const inputElements = Array.from(modalForm.querySelectorAll(config.inputSelector));
+  const buttonElement = modalForm.querySelector(config.submitButtonSelector);
+  disableButton(buttonElement);
+  const inputElements = Array.from(
+    modalForm.querySelectorAll(config.inputSelector)
+  );
   inputElements.forEach((inputElement) => {
-    const inputError = inputElement.parentElement.querySelector(config.errorSelector);
+    const inputError = inputElement.parentElement.querySelector(
+      config.errorSelector
+    );
     hideInputError(inputElement, inputError);
   });
+  modalForm.reset();
+}
+
+let profileCurrentStates = [];
+
+function getProfileCurrentStates() {
+  profileCurrentStates = [];
+  profileCurrentStates.push(profileName.textContent, profileAbout.textContent);
 }
