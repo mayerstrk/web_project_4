@@ -20,4 +20,4 @@ addEditEventListeners();
 
 addAddEventListeners();
 
-enableValidation();
+enableValidation(config);

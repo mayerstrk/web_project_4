@@ -93,7 +93,7 @@ function setEventListeners(inputElements, buttonElement) {
   });
 }
 
-function enableValidation() {
+function enableValidation(config) {
   forms.forEach((form) => {
     const inputElements = Array.from(
       form.querySelectorAll(config.inputSelector)
