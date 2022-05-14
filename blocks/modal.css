@@ -19,7 +19,7 @@
   opacity: 1;
 }
 
-.modal__form-window {
+.modal__window {
   position: relative;
   box-sizing: border-box;
   margin: 0 19px;
@@ -30,6 +30,22 @@
   display: flex;
   flex-direction: column;
   border-radius: 10px;
+}
+
+.modal__window_type_card {
+  position: static;
+  padding: 0;
+  background: none;
+  width: auto;
+  border-radius: none;
+  margin: 0 40px 0;
+  display: flex;
+  max-width: 75vw;
+  max-height: 75vh;
+  min-width: 240px;
+  font-family: "Inter";
+  font-style: normal;
+  color: #ffffff;
 }
 
 .modal__close-button {

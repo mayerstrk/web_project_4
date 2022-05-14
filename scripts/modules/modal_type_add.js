@@ -1,8 +1,7 @@
 const addCardModal = document.querySelector(".modal_type_add");
-const formWindowTypeAdd = document.querySelector(".modal__form-window_type_add")
+const formWindowTypeAdd = document.querySelector(".modal__window_type_add")
 const formTypeAdd = document.querySelector(".form_type_add")
 const addButton = document.querySelector(".profile__add-button")
-const closeButtonForAdd = addCardModal.querySelector(".modal__close-button_for_add-form");
 const inputTitle = formWindowTypeAdd.querySelector(".form__input_type_title");
 const inputURL = formWindowTypeAdd.querySelector(".form__input_type_url")
 
@@ -21,15 +20,8 @@ function handleAddSubmit(evt) {
   /* 1.
   Creates card abjects with name and link properties according 
   to user input */
-  const cardObject = {
-    name: inputTitle.value,
-    link: inputURL.value
-  }
-
-   /* 2.
-  calls the renderCard function from cards.js to render the 
-  newly created card on form submit */
-  renderCard(cardObject)
+  newcard = new Card(inputTitle.value, inputURL.value);
+  newcard.render();
   
   /* 3.
   closes modal after card is added */
@@ -40,9 +32,13 @@ function handleAddSubmit(evt) {
   formTypeAdd.reset() 
 }
 
-// Adds event listeners for the add button and the close button in the modal
-addButton.addEventListener("click", () => openModal(addCardModal));
-closeButtonForAdd.addEventListener("click", () => closeModal(addCardModal));
+function addAddEventListeners() {
+  // Adds event listeners for the add button and the close button in the modal
+  addButton.addEventListener("click", () => {
+    initModal(addCardModal);
+  });
 
-// Specifies submit handler for the modal form
-formWindowTypeAdd.addEventListener("submit", handleAddSubmit);
+
+  // Specifies submit handler for the modal form
+  formWindowTypeAdd.addEventListener("submit", handleAddSubmit);
+}

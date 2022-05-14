@@ -28,7 +28,7 @@
               <h1 class="profile__name">Jackes Cousteau</h1>
               <button type="button" class="profile__edit-button"></button>
             </div>
-          <p class="profile__caption">Explorer</p>
+          <p class="profile__about">Explorer</p>
           </div>
           <button type="button" class="profile__add-button">
             <img src="./images/profile/__add-button.svg" alt="add button" class="profile__add-plus-sign">
@@ -59,31 +59,43 @@
     </div>
 
     <div class="modal modal_type_edit">
-      <div class="modal__form-window modal__form-window_type_edit">
+      <div class="modal__window modal__window_type_edit">
         <button type="button" class="modal__close-button modal__close-button_for_edit-form"></button>
         <h3 class="modal__title">Edit Profile</h3>
         <form class="form form_type_edit" name="edit-profile">
-          <input type="text" id="input-name" name="name" placeholder="Jackes Cousteau" class="form__input form__input_type_name" required>
-          <input type="text" id="input-caption" name="caption" placeholder="Explorer" class="form__input form__input_type_caption" required>
+          <div class="form__input-container">
+            <input type="text" id="input-name" name="name" minlength="2" maxlength="40" placeholder="Jackes Cousteau" class="form__input form__input_valid form__input_type_name" required>
+            <span class="form__input-error form__input-error_type_name">.</span>
+          </div>
+          <div class="form__input-container">
+            <input type="text" id="input-about" name="about" minlength="2" maxlength="200" placeholder="Explorer" class="form__input form__input_valid form__input_type_about" required>
+            <span class="form__input-error form__input-error_type_about">.</span>
+          </div>
           <button type="submit" class="form__button">Save</button>
         </form>
       </div>
     </div>
 
     <div class="modal modal_type_add">
-      <div class="modal__form-window modal__form-window_type_add">
+      <div class="modal__window modal__window_type_add">
         <button type="button" class="modal__close-button modal__close-button_for_add-form"></button>
         <h3 class="modal__title">New Place</h3>
-        <form class="form form_type_add" name="edit-profile">
-          <input type="text" id="input-title" name="title" placeholder="Title" class="form__input form__input_type_title" required>
-          <input type="text" id="input-url" name="url" placeholder="Image URL" class="form__input form__input_type_url" required>
+        <form novalidate class="form form_type_add" name="add-card">
+          <div class="form__input-container">
+            <input type="text" maxlength="30" id="input-title" name="title" placeholder="Title" class="form__input form__input_valid form__input_type_title" required>
+            <span class="form__input-error form__input-error_type_title">.</span>
+          </div>
+          <div class="form__input-container">
+            <input type="url" id="input-url" name="url" placeholder="Image URL" class="form__input form__input_valid form__input_type_url" required>
+            <span class="form__input-error form__input-error_type_url">.</span>
+          </div>
           <button type="submit" class="form__button">Create</button>
         </form>
       </div>
     </div>
 
       <div class="modal modal_type_card">
-        <div class="card-modal">
+        <div class="modal__window modal__window_type_card">
           <div class="card-modal__photo-container">
             <button type="button" class="modal__close-button modal__close-button_for_card-modal"></button>
             <img class="card-modal__photo"/>
@@ -91,11 +103,13 @@
           <h2 class="card-modal__photo-caption"></h2>
         </div>
       </div>
-    
-    <script src="./scripts/modal_functions.js"></script>
-    <script src="./scripts/modal_type_edit.js"></script>
-    <script src="./scripts/modal_type_add.js"></script>
-    <script src="./scripts/modal_type_card.js"></script>
-    <script src="./scripts/cards.js"></script>
+      
+    <script src="./scripts/modules/modal_functions.js"></script>
+    <script src="./scripts/modules/modal_type_edit.js"></script>
+    <script src="./scripts/modules/modal_type_add.js"></script>
+    <script src="./scripts/modules/modal_type_card.js"></script>
+    <script src="./scripts/modules/cards.js"></script>
+    <script src="./scripts/modules/validation.js"></script>
+    <script src="./scripts/main.js"></script>
   </body>
 </html>

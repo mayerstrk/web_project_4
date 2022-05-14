@@ -83,10 +83,10 @@
   margin: auto;
 }
 
-.profile__caption {
+.profile__about {
   width: fit-content;
   margin: 0;
-  max-width: 410px;
+  max-width: 100%;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -141,7 +141,7 @@
     margin-bottom: 3px;
   }
 
-  .profile__caption {
+  .profile__about {
     font-size: 14px;
     line-height: 17px;
   }
