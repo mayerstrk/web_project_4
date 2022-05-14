@@ -38,14 +38,6 @@
   background: none;
   width: auto;
   border-radius: none;
-  margin: 0 40px 0;
-  display: flex;
-  max-width: 75vw;
-  max-height: 75vh;
-  min-width: 240px;
-  font-family: "Inter";
-  font-style: normal;
-  color: #ffffff;
 }
 
 .modal__close-button {
