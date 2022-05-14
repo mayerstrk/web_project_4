@@ -21,7 +21,7 @@ function renderProfileInfo() {
  */
 function renderEditForm() {
   renderProfileInfo()
-  initModal(editProfileModal);
+  openModal(editProfileModal);
 };
 
 /**
@@ -52,7 +52,6 @@ function addEditEventListeners() {
   and loads profile info on modal open */
   editButton.addEventListener("click", () => {
     renderEditForm();
-    enableValidation();
   });
   
   // Saves changes after form is filled and submitted

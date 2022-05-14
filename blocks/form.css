@@ -44,7 +44,7 @@
   width: 100%;
 }
 
-.form__input-error {
+.form__error {
 width: fit-content;
 margin: 5px 0 0;
 padding: 0 7px 0;
@@ -56,7 +56,7 @@ visibility: hidden;
 opacity: 0;
 }
 
-.form__input-error_active {
+.form__error_visible {
   visibility: visible;
   opacity: 1;
 }
@@ -74,16 +74,16 @@ opacity: 0;
   transition: opacity ease-out 0.3s;
 }
 
-.form__button:hover {
+.form__button:hover:not(:disabled) {
   opacity: 0.8;
 }
 
 .form__button_inactive {
   opacity: 0.2;
   color: #000;
-  background: transparent;
+  background: transparent;.
   border: 1px solid #000;
-  border-radius: 2px;
+  cursor: default;
 }
 
 @media screen and (max-width: 524px) {
