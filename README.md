@@ -1,4 +1,4 @@
-# Project 5: Around The U.S.
+# Project 6: Around The U.S.
 
 
 ### Overview
@@ -18,6 +18,8 @@ It is built using HTML5 CSS and Javascript.
 - Add custom cards
 - Delete cards
 - Open image on click
+- Various popup close methods
+- Form Validation
 
   *more on the way*
 
