@@ -44,13 +44,14 @@ function handleProfileFormSubmit(evt) {
   inputAbout.placeholder = `${inputAbout.value}`;
 
   // 3. Closes modal window
-  resetModal(editProfileModal);
+  closeModal(editProfileModal);
 }
 
 function addEditEventListeners() {
   /*Toggles modal window visibility when buttons are clicked
   and loads profile info on modal open */
   editButton.addEventListener("click", () => {
+    resetValidation(editProfileModal);
     renderEditForm();
   });
   

@@ -14,10 +14,22 @@ placesCards.addEventListener("click", (evt) => {
   }
 });
 
-getProfileCurrentStates();
+renderProfileInfo();
 
 addEditEventListeners();
 
 addAddEventListeners();
+
+const config = {
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  inputValidClass: "form__input_valid",
+  inputErrorClass: "form__input_error",
+  submitButtonSelector: ".form__button",
+  inactiveButtonClass: "form__button_disabled",
+  errorClass: "form__error",
+  errorSelector: ".form__error",
+  errorActiveClass: "form__error_visible",
+};
 
 enableValidation(config);

@@ -36,6 +36,7 @@ function addAddEventListeners() {
   // Adds event listeners for the add button and the close button in the modal
   addButton.addEventListener("click", () => {
     openModal(addCardModal);
+    resetValidation(addCardModal, config)
   });
 
 

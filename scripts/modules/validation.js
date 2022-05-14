@@ -1,28 +1,23 @@
-forms = Array.from(document.querySelectorAll(config.formSelector));
-
-function showInputError(inputElement, inputError, errorMessage) {
+function showInputError(inputElement, inputError, errorMessage, config) {
   inputElement.classList.remove(config.inputValidClass);
   inputElement.classList.add(config.inputErrorClass);
   inputError.textContent = errorMessage;
   inputError.classList.add(config.errorActiveClass);
 }
 
-function hideInputError(inputElement, inputError) {
+function hideInputError(inputElement, inputError, config) {
   inputElement.classList.remove(config.inputErrorClass);
   inputElement.classList.add(config.inputValidClass);
   inputError.classList.remove(config.errorActiveClass);
   inputError.textContent = ".";
 }
 
-const isValid = (inputElement) => {
-  const inputError = inputElement.parentElement.querySelector(
-    `.form__error_type_${inputElement.name}`
-  );
-
+const isValid = (inputElement, config) => {
+  const inputError = inputElement.parentElement.querySelector(`.form__error_type_${inputElement.name}`);
   if (!inputElement.validity.valid) {
-    showInputError(inputElement, inputError, inputElement.validationMessage);
+    showInputError(inputElement, inputError, inputElement.validationMessage, config);
   } else {
-    hideInputError(inputElement, inputError);
+    hideInputError(inputElement, inputError, config);
   }
 };
 
@@ -45,84 +40,71 @@ const haveSameState = (inputElements, inputValues) => {
   }
 };
 
-const disableButton = (button) => {
+const disableButton = (button, config) => {
   button.disabled = true;
   button.classList.add(config.inactiveButtonClass);
 };
 
-const enableButton = (button) => {
+const enableButton = (button, config) => {
   button.disabled = false;
   button.classList.remove(config.inactiveButtonClass);
 };
 
-const toggleButtonState = (
-  inputElements,
-  buttonElement,
-  currentStates,
-  inputStates
-) => {
+const toggleButtonState = (inputElements, buttonElement, currentStates, inputStates, config) => {
   // If there is at least one invalid input
   if (
     hasInvalidInput(inputElements) ||
     haveSameState(currentStates, inputStates)
   ) {
     // make the button inactive
-    disableButton(buttonElement);
+    disableButton(buttonElement, config);
   } else {
     // otherwise, make it active
-    enableButton(buttonElement);
+    enableButton(buttonElement, config);
   }
 };
 
-function setEventListeners(inputElements, buttonElement) {
+function setEventListeners(inputElements, buttonElement, config) {
   inputElements.forEach((inputElement) => {
+    const currentStates = [];
+    inputElements.forEach((inputElement) =>
+      currentStates.push(inputElement.value)
+    );
     inputElement.addEventListener("input", () => {
-      isValid(inputElement);
-      getProfileCurrentStates();
+      isValid(inputElement, config);
       const inputStates = [];
       inputElements.forEach((inputElement) =>
         inputStates.push(inputElement.value)
       );
-      toggleButtonState(
-        inputElements,
-        buttonElement,
-        profileCurrentStates,
-        inputStates
-      );
+      toggleButtonState(inputElements, buttonElement, currentStates, inputStates, config);
     });
   });
 }
 
 function enableValidation(config) {
+  forms = Array.from(document.querySelectorAll(config.formSelector));
   forms.forEach((form) => {
     const inputElements = Array.from(
       form.querySelectorAll(config.inputSelector)
     );
     const buttonElement = form.querySelector(config.submitButtonSelector);
-    disableButton(buttonElement);
-    setEventListeners(inputElements, buttonElement);
+    disableButton(buttonElement, config);
+    setEventListeners(inputElements, buttonElement, config);
   });
 }
 
 function resetValidation(modal) {
-  const modalForm = modal.querySelector(config.formSelector);
-  const buttonElement = modalForm.querySelector(config.submitButtonSelector);
-  disableButton(buttonElement);
+  const modalForm = modal.querySelector(".form");
+  modalForm.reset();
+  const buttonElement = modalForm.querySelector(".form__button");
+  disableButton(buttonElement, config);
   const inputElements = Array.from(
-    modalForm.querySelectorAll(config.inputSelector)
+    modalForm.querySelectorAll(".form__input")
   );
   inputElements.forEach((inputElement) => {
     const inputError = inputElement.parentElement.querySelector(
-      config.errorSelector
+      ".form__error"
     );
-    hideInputError(inputElement, inputError);
+    hideInputError(inputElement, inputError, config);
   });
-  modalForm.reset();
-}
-
-let profileCurrentStates = [];
-
-function getProfileCurrentStates() {
-  profileCurrentStates = [];
-  profileCurrentStates.push(profileName.textContent, profileAbout.textContent);
 }
