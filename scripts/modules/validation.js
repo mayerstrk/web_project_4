@@ -51,9 +51,11 @@ const toggleButtonState = (inputElements, currentStates, inputStates, buttonElem
   if (hasInvalidInput(inputElements) || sameState(currentStates, inputStates) ) {
     // make the button inactive
     buttonElement.classList.add("form__button_inactive");
+    buttonElement.disabled = true;
   } else {
     // otherwise, make it active
     buttonElement.classList.remove("form__button_inactive");
+    buttonElement.disabled = false;
   }
 }; 
 
@@ -80,6 +82,7 @@ function enableValidation() {
     const inputElements = Array.from(form.querySelectorAll(".form__input"));
     const buttonElement = form.querySelector(".form__button");
     buttonElement.classList.add("form__button_inactive");
+    buttonElement.disabled = true
     setEventListeners(inputElements, buttonElement);
   });
 }
@@ -87,7 +90,7 @@ function enableValidation() {
 function resetValidation(modal) {
   const modalForm = modal.querySelector(".form");
   const buttonElement = modalForm.querySelector(".form__button");
-  buttonElement.classList.add("form__button_inactive")
+  buttonElement.classList.add("form__button_inactive");
   const inputElements = Array.from(modalForm.querySelectorAll(".form__input"));
   inputElements.forEach((inputElement) => {
     const inputError = inputElement.parentElement.querySelector(".form__input-error");

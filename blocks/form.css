@@ -30,7 +30,7 @@
 }
 
 .form__input_error {
-  border-bottom: 1px solid #FF0000
+  border-bottom: 1px solid #FF0000;
 }
 
 .form__input_error:focus {
@@ -53,7 +53,7 @@ font-size: 12px;
 line-height: 15px;
 color: #FF0000;
 visibility: hidden;
-opacity: 0
+opacity: 0;
 }
 
 .form__input-error_active {
