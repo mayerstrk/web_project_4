@@ -36,6 +36,7 @@ function closeOnClickOut(evt) {
 
 function closeWithEsc(evt) {
   if (evt.key === "Escape") {
-    closeModal();
+    const openedModal = document.querySelector(".modal_visible");
+    closeModal(openedModal);
   }
 }
