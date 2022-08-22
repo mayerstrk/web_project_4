@@ -30,7 +30,7 @@
 }
 
 .form__input_error {
-  border-bottom: 1px solid #FF0000;
+  border-bottom: 1px solid #ff0000;
 }
 
 .form__input_error:focus {
@@ -45,15 +45,15 @@
 }
 
 .form__error {
-width: fit-content;
-margin: 5px 0 0;
-padding: 0 7px 0;
-font-style: normal;
-font-size: 12px;
-line-height: 15px;
-color: #FF0000;
-visibility: hidden;
-opacity: 0;
+  width: fit-content;
+  margin: 5px 0 0;
+  padding: 0 7px 0;
+  font-style: normal;
+  font-size: 12px;
+  line-height: 15px;
+  color: #ff0000;
+  visibility: hidden;
+  opacity: 0;
 }
 
 .form__error_visible {
@@ -64,7 +64,7 @@ opacity: 0;
 .form__button {
   margin: 18px 0 0;
   background: #000;
-  border: none;
+  border: 1px solid #000;
   color: #fff;
   font-size: 18px;
   border-radius: 2px;

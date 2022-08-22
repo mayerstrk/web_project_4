@@ -1,3 +1,5 @@
+import { openModal, resetValidation } from "./utils.js"
+
 const addCardModal = document.querySelector(".modal_type_add");
 const formWindowTypeAdd = document.querySelector(".modal__window_type_add")
 const formTypeAdd = document.querySelector(".form_type_add")
@@ -32,14 +34,17 @@ function handleAddSubmit(evt) {
   formTypeAdd.reset() 
 }
 
-function addAddEventListeners() {
+function addAddEventListeners(formValidator) {
   // Adds event listeners for the add button and the close button in the modal
   addButton.addEventListener("click", () => {
     openModal(addCardModal);
-    resetValidation(addCardModal, config)
+    resetValidation(formValidator)
   });
 
 
   // Specifies submit handler for the modal form
   formWindowTypeAdd.addEventListener("submit", handleAddSubmit);
 }
+
+
+export { addAddEventListeners };

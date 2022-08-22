@@ -1,3 +1,4 @@
+import { openModal } from "./utils.js";
 
 const cardModal = document.querySelector(".modal_type_card");
 const cardModalPhoto = cardModal.querySelector(".card-modal__photo");
@@ -35,3 +36,5 @@ const renderCardModal = evt => {
   // 2 Calls the openModal function from modal_functions.js to toggle modal window visibility
   openModal(cardModal)
 };
+
+export { renderCardModal };
