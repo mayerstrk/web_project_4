@@ -53,12 +53,12 @@ class FormValidator {
     }
   }
 
-  _haveSameState(inputsArray) {
+  _haveSameState() {
     return this._inputs.every((input) => this._hasSameState(input))
   } 
 
-  _hasSameState(input) {
-    return input.value === input.placeholder;
+  _hasSameState() {
+    return this._currentStates.every((val, i) => val === this._updatedStates[i]);
   }
 
   _isValid(input) {
@@ -66,6 +66,7 @@ class FormValidator {
   }
 
   _handleInput(input, errorElement) {
+    this._updatedStates = this._inputs.map((input) => input.value);
     if (this._isValid(input)) {
       this._handleIsValid(input, errorElement);
       if (this._haveSameState(this._inputs)) {
@@ -78,6 +79,7 @@ class FormValidator {
 
   _setEventListeners() {
     this._inputs = [...this._form.querySelectorAll(this._inputSelector)];
+    this._currentStates = this._inputs.map((input) => input.value);
 
     this._inputs.forEach((input) => {
       const errorElement = input.nextElementSibling;
@@ -88,6 +90,7 @@ class FormValidator {
   }
 
   enableValidation() {
+
     this._form.addEventListener("submit", (e) => e.preventDefault());
     // we will pass the button element to each input so that we can disable it in the key press event handler
     this._buttonElement = this._form.querySelector(this._submitButtonSelector);

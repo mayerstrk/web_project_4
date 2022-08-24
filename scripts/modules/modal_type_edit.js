@@ -35,13 +35,13 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
 
   // 1. Applies changes made by user
-  profileName.textContent = `${inputName.value}`;
-  profileAbout.textContent = `${inputAbout.value}`;
+  profileName.textContent = inputName.value;
+  profileAbout.textContent = inputAbout.value;
 
   /* 2. Sets value of input field's placeholder attribute to
         current state */
-  inputName.placeholder = `${inputName.value}`;
-  inputAbout.placeholder = `${inputAbout.value}`;
+  inputName.placeholder = inputName.value;
+  inputAbout.placeholder = inputAbout.value;
 
   // 3. Closes modal window
   closeModal(editProfileModal);

@@ -1,8 +1,13 @@
 export class Card {
-  constructor(name, link, templateSelector) {
-    this._name = name;
-    this._link = link;
-    this._templateSelector = templateSelector;
+  constructor(settings, card) {
+    this._name = card.name;
+    this._link = card.link;
+    this._templateSelector = settings.templateSelector;
+    this._likeButtonSelector = settings.likeButtonSelector
+    this._likeButtonActiveClass = settings.likeButtonActiveClass
+    this._likeState = 0;
+    this._deleteButtonSelector = settings.deleteButtonSelector
+
   }
 
   _createCardElement() {
@@ -15,7 +20,39 @@ export class Card {
     return cardElement;
   }
 
-  // !!! EVENT HANDLERS AREN'T HERE BECAUSE I USED THE DELEGATION EVENT HANDLING PATTERN
+  _getButtons() {
+    const buttons = {
+      likeButton: this._cardElement.querySelector(this._likeButtonSelector),
+      deleteButton: this._cardElement.querySelector(this._deleteButtonSelector),
+    }
+
+    return buttons
+  }
+
+  _toggleLikeState(likeButton) {
+    switch(this._likeState) {
+      case 0:
+        likeButton.classList.add(this._likeButtonActiveClass);
+        this._likeState = 1;
+        return
+      case 1:
+        likeButton.classList.remove(this._likeButtonActiveClass)
+        this._likeState = 0
+    }
+  }
+
+  _deleteCard() {
+    this._cardElement.remove();
+    this._cardElement = null;
+  }
+
+  _addEventListeners() {
+    const {likeButton, deleteButton} = this._getButtons();
+
+    likeButton.addEventListener("click", () => this._toggleLikeState(likeButton))
+    deleteButton.addEventListener("click", () => this._deleteCard())
+  }
+
   _generateCard() {
     // Stores card element in local property
     this._cardElement = this._createCardElement();
@@ -29,6 +66,7 @@ export class Card {
     // Sets the markup for the cards name according to data fed to the constructor
     this._cardElement.querySelector(".card__name").textContent = this._name;
 
+    this._addEventListeners();
     return this._cardElement;
   }
 
