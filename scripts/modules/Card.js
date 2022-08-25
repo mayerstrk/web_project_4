@@ -10,7 +10,7 @@ export class Card {
 
   }
 
-  _createCardElement() {
+  _createCardElement = () => {
     // Queries template and clones node into variable
     const cardElement = document
       .querySelector(`${this._templateSelector}`)
@@ -20,40 +20,36 @@ export class Card {
     return cardElement;
   }
 
-  _getButtons() {
-    const buttons = {
-      likeButton: this._cardElement.querySelector(this._likeButtonSelector),
-      deleteButton: this._cardElement.querySelector(this._deleteButtonSelector),
-    }
-
-    return buttons
+  _getButtons = () => {
+    this._likeButton = this._cardElement.querySelector(this._likeButtonSelector);
+    this._deleteButton = this._cardElement.querySelector(this._deleteButtonSelector);
   }
 
-  _toggleLikeState(likeButton) {
+  _toggleLikeState = () => {
     switch(this._likeState) {
       case 0:
-        likeButton.classList.add(this._likeButtonActiveClass);
+        this._likeButton.classList.add(this._likeButtonActiveClass);
         this._likeState = 1;
         return
       case 1:
-        likeButton.classList.remove(this._likeButtonActiveClass)
+        this._likeButton.classList.remove(this._likeButtonActiveClass);
         this._likeState = 0
     }
   }
 
-  _deleteCard() {
+  _deleteCard = () => {
     this._cardElement.remove();
     this._cardElement = null;
   }
 
-  _addEventListeners() {
-    const {likeButton, deleteButton} = this._getButtons();
+  _addEventListeners = () => {
+    this._getButtons();
 
-    likeButton.addEventListener("click", () => this._toggleLikeState(likeButton))
-    deleteButton.addEventListener("click", () => this._deleteCard())
+    this._likeButton.addEventListener("click", () => this._toggleLikeState())
+    this._deleteButton.addEventListener("click", () => this._deleteCard())
   }
 
-  _generateCard() {
+  generateCard = () => {
     // Stores card element in local property
     this._cardElement = this._createCardElement();
 
@@ -64,17 +60,11 @@ export class Card {
     this._cardPhoto.setAttribute("alt", `Picture of ${this._name}`);
 
     // Sets the markup for the cards name according to data fed to the constructor
-    this._cardElement.querySelector(".card__name").textContent = this._name;
+    const cardNameElement = this._cardElement.querySelector(".card__name");
+    cardNameElement.textContent = this._name;
 
     this._addEventListeners();
-    return this._cardElement;
-  }
 
-  /**
-   * Creates a card element and prepends it to
-   * the placesCards container adding it to the DOM
-   */
-  render(parent) {
-    parent.prepend(this._generateCard());
+    return this._cardElement;
   }
 }

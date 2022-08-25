@@ -1,15 +1,13 @@
-import { Card } from "./modules/Card.js";
 import { FormValidator } from "./modules/FormValidator.js";
 import { renderProfileInfo, addEditEventListeners } from "./modules/modal_type_edit.js";
-import { addAddEventListeners } from "./modules/modal_type_add.js";
+import { addAddEventListeners, renderCard } from "./modules/modal_type_add.js";
+import { renderCardModal } from "./modules/modal_type_card.js"
 import { initialCards, cardSettings, validationSettings } from "./modules/configuration.js";
-import { renderCardModal } from "./modules/utils.js";
 
-const placesCards = document.querySelector(".places__cards");
+export const placesCards = document.querySelector(".places__cards");
 
-initialCards.forEach((card) => {
-  const newCard = new Card(cardSettings, card);
-  newCard.render(placesCards);
+initialCards.forEach((cardObj) => {
+  renderCard(cardObj, placesCards)
 });
 
 const cardModal = document.querySelector(".modal_type_card");

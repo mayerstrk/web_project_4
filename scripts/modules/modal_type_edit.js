@@ -26,8 +26,7 @@ function renderEditForm() {
 
 /**
  * 1. Applies changes submitted by user
- * 2. Sets valie of input field's placeholder attribute to current state
- * 3. Closes modal window
+ * 2. Closes modal window
  * @param {Event} evt
  */
 function handleProfileFormSubmit(evt) {
@@ -38,12 +37,7 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = inputName.value;
   profileAbout.textContent = inputAbout.value;
 
-  /* 2. Sets value of input field's placeholder attribute to
-        current state */
-  inputName.placeholder = inputName.value;
-  inputAbout.placeholder = inputAbout.value;
-
-  // 3. Closes modal window
+  // 2. Closes modal window
   closeModal(editProfileModal);
 }
 

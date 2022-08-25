@@ -1,40 +1,42 @@
 import { openModal } from "./utils.js";
 
-const cardModal = document.querySelector(".modal_type_card");
-const cardModalPhoto = cardModal.querySelector(".card-modal__photo");
-const cardModalPhotoCaption = cardModal.querySelector(".card-modal__photo-caption");
+function getCardModalFields(cardModal) {
+  const cardModalFields = {
+    cardModalPhoto: cardModal.querySelector(".card-modal__photo"),
+    cardModalPhotoCaption: cardModal.querySelector(".card-modal__photo-caption"),
+  }
 
+  return cardModalFields
+}
 
 /** 
  * Gets the values for the card modal depending on which picture is clicked 
- * @param {Event} evt - event that triggers opening modal window
+ * @param {Element} cardPhoto - cardElement that was clicked
  */
-function getCardModalValues(evt) {
-    
+function getCardModalValues(cardPhoto) {
+  const modalValues = {
+    sourceValue: cardPhoto.getAttribute("src"),
+    captionText: cardPhoto.parentElement.nextElementSibling.firstElementChild.textContent,
+  };
 
-    // Gets relevant values from the card's elements to assign them to the modal window's elements
-    const srcValue = evt.target.closest(".card__photo").getAttribute("src");
-    const captionText =
-      evt.target.parentElement.nextElementSibling.firstElementChild.textContent;
+  return modalValues
+}
 
-    // Assigns the values to their corresponding elements in the modal window
-    cardModalPhoto.setAttribute("src", srcValue);
-    cardModalPhoto.setAttribute("alt", `Photo of ${captionText}`);
-    cardModalPhotoCaption.textContent = captionText;
-  }
+function setCardModalValues(cardPhoto, cardModal) {
+  const { sourceValue, captionText } = getCardModalValues(cardPhoto);
+  const { cardModalPhoto, cardModalPhotoCaption } = getCardModalFields(cardModal);
+  
+  cardModalPhoto.setAttribute("src", sourceValue);
+  cardModalPhoto.setAttribute("alt", `Photo of ${captionText}`);
+  cardModalPhotoCaption.textContent = captionText;
+}
 
-
-/** 
- * 1. Gets the values for the card modal depending on 
- *    which picture is clicked
- * 2. Toggles modal window visibility
- * @param {event} evt - event that triggers opening modal window
- */
-const renderCardModal = evt => {
+function renderCardModal(cardPhoto, cardModal) {
   // 1 Gets appropiate values
-  getCardModalValues(evt)
+  setCardModalValues(cardPhoto, cardModal)
   // 2 Calls the openModal function from modal_functions.js to toggle modal window visibility
   openModal(cardModal)
 };
+
 
 export { renderCardModal };
