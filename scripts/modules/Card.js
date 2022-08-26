@@ -1,5 +1,7 @@
 export class Card {
-  constructor(settings, card) {
+  constructor(settings, card, handleImageClick) {
+    this._handleImageClick = handleImageClick
+    this._cardObj = card;
     this._name = card.name;
     this._link = card.link;
     this._templateSelector = settings.templateSelector;
@@ -7,7 +9,6 @@ export class Card {
     this._likeButtonActiveClass = settings.likeButtonActiveClass
     this._likeState = 0;
     this._deleteButtonSelector = settings.deleteButtonSelector
-
   }
 
   _createCardElement = () => {
@@ -20,7 +21,7 @@ export class Card {
     return cardElement;
   }
 
-  _getButtons = () => {
+  _initializeButtons = () => {
     this._likeButton = this._cardElement.querySelector(this._likeButtonSelector);
     this._deleteButton = this._cardElement.querySelector(this._deleteButtonSelector);
   }
@@ -43,10 +44,10 @@ export class Card {
   }
 
   _addEventListeners = () => {
-    this._getButtons();
-
-    this._likeButton.addEventListener("click", () => this._toggleLikeState())
-    this._deleteButton.addEventListener("click", () => this._deleteCard())
+    this._likeButton.addEventListener("click", this._toggleLikeState)
+    this._deleteButton.addEventListener("click", this._deleteCard)
+    this._cardPhoto.addEventListener("click", () => this._handleImageClick(this._cardObj))
+   
   }
 
   generateCard = () => {
@@ -62,6 +63,8 @@ export class Card {
     // Sets the markup for the cards name according to data fed to the constructor
     const cardNameElement = this._cardElement.querySelector(".card__name");
     cardNameElement.textContent = this._name;
+
+    this._initializeButtons();
 
     this._addEventListeners();
 

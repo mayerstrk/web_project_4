@@ -1,18 +1,10 @@
-import { Card } from "./Card.js";
 import { openModal, closeModal, resetValidation } from "./utils.js";
-import { cardSettings } from "./configuration.js";
-import { placesCards } from "../main.js";
+import { renderCard, placesCards } from "../index.js";
 
 const addCardModal = document.querySelector(".modal_type_add");
 const formWindowTypeAdd = document.querySelector(".modal__window_type_add");
 const formTypeAdd = document.querySelector(".form_type_add");
 const addButton = document.querySelector(".profile__add-button");
-
-function renderCard(cardObj, cardContainer) {
-  const cardInstance = new Card(cardSettings, cardObj);
-  const cardElement = cardInstance.generateCard();
-  cardContainer.prepend(cardElement);
-}
 
 /**
  * 1. creates a card object
@@ -57,4 +49,4 @@ function addAddEventListeners(formValidator, cardContainer) {
   );
 }
 
-export { addAddEventListeners, renderCard };
+export { addAddEventListeners };
