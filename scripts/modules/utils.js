@@ -31,7 +31,10 @@ function handleCloseButton() {
 
 function closeOnClickOut(evt) {
   if (
-    !(evt.target.closest(".modal__window") || evt.target.classList.contains("modal__window"))
+    !(
+      evt.target.closest(".modal__window") ||
+      evt.target.classList.contains("modal__window")
+    )
   ) {
     const openedModal = document.querySelector(".modal_visible");
     closeModal(openedModal);

@@ -46,5 +46,4 @@ const validationSettings = {
   errorActiveClass: "form__error_visible",
 };
 
-
-export { initialCards, cardSettings, validationSettings}
+export { initialCards, cardSettings, validationSettings };

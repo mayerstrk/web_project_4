@@ -1,5 +1,5 @@
 import { openModal, closeModal, resetValidation } from "./utils.js";
-import { renderCard, placesCards } from "../index.js";
+import { renderCard } from "../index.js";
 
 const addCardModal = document.querySelector(".modal_type_add");
 const formWindowTypeAdd = document.querySelector(".modal__window_type_add");
@@ -25,7 +25,7 @@ function handleAddSubmit(evt, cardContainer) {
     link: formWindowTypeAdd.querySelector(".form__input_type_url").value,
   };
 
-  renderCard(newCardObj, placesCards);
+  renderCard(newCardObj, cardContainer);
 
   /* 3.
   closes modal after card is added */
