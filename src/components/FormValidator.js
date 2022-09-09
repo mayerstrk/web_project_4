@@ -1,4 +1,4 @@
-class FormValidator {
+export default class FormValidator {
   constructor(form, settings) {
     this._form = form;
     this._inputSelector = settings.inputSelector;
@@ -79,10 +79,19 @@ class FormValidator {
     }
   }
 
-  _setEventListeners() {
-    this._inputs = [...this._form.querySelectorAll(this._inputSelector)];
+  updateCurrentStates() {
     this._currentStates = this._inputs.map((input) => input.value);
+  }
 
+  _initializeInputs() {
+    this._inputs = [...this._form.querySelectorAll(this._inputSelector)];
+  }
+
+  _initializeCurrentStates() {
+    this._currentStates = this._inputs.map((input) => input.value);
+  }
+
+  _setEventListeners() {
     this._inputs.forEach((input) => {
       const errorElement = input.nextElementSibling;
       input.addEventListener("input", () =>
@@ -95,6 +104,8 @@ class FormValidator {
     this._form.addEventListener("submit", (e) => e.preventDefault());
     // we will pass the button element to each input so that we can disable it in the key press event handler
     this._buttonElement = this._form.querySelector(this._submitButtonSelector);
+    this._initializeInputs();
+    this._initializeCurrentStates();
     this._setEventListeners();
     this._disableButton();
   }
@@ -112,5 +123,3 @@ class FormValidator {
     this._hideAllFormErrors();
   }
 }
-
-export { FormValidator };

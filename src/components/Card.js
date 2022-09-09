@@ -1,14 +1,14 @@
-export class Card {
-  constructor(settings, card, handleImageClick) {
-    this._handleImageClick = handleImageClick
-    this._cardObj = card;
-    this._name = card.name;
-    this._link = card.link;
+export default class Card {
+  constructor(settings, cardObj, handleImageClick) {
+    this._handleImageClick = handleImageClick;
+    this._cardObj = cardObj;
+    this._name = cardObj.title;
+    this._link = cardObj.url;
     this._templateSelector = settings.templateSelector;
-    this._likeButtonSelector = settings.likeButtonSelector
-    this._likeButtonActiveClass = settings.likeButtonActiveClass
+    this._likeButtonSelector = settings.likeButtonSelector;
+    this._likeButtonActiveClass = settings.likeButtonActiveClass;
     this._likeState = 0;
-    this._deleteButtonSelector = settings.deleteButtonSelector
+    this._deleteButtonSelector = settings.deleteButtonSelector;
   }
 
   _createCardElement = () => {
@@ -19,36 +19,41 @@ export class Card {
       .cloneNode(true);
 
     return cardElement;
-  }
+  };
 
   _initializeButtons = () => {
-    this._likeButton = this._cardElement.querySelector(this._likeButtonSelector);
-    this._deleteButton = this._cardElement.querySelector(this._deleteButtonSelector);
-  }
+    this._likeButton = this._cardElement.querySelector(
+      this._likeButtonSelector
+    );
+    this._deleteButton = this._cardElement.querySelector(
+      this._deleteButtonSelector
+    );
+  };
 
   _toggleLikeState = () => {
-    switch(this._likeState) {
+    switch (this._likeState) {
       case 0:
         this._likeButton.classList.add(this._likeButtonActiveClass);
         this._likeState = 1;
-        return
+        return;
       case 1:
         this._likeButton.classList.remove(this._likeButtonActiveClass);
-        this._likeState = 0
+        this._likeState = 0;
     }
-  }
+  };
 
   _deleteCard = () => {
     this._cardElement.remove();
     this._cardElement = null;
-  }
+  };
 
   _addEventListeners = () => {
-    this._likeButton.addEventListener("click", this._toggleLikeState)
-    this._deleteButton.addEventListener("click", this._deleteCard)
-    this._cardPhoto.addEventListener("click", () => this._handleImageClick(this._cardObj))
-   
-  }
+    this._likeButton.addEventListener("click", this._toggleLikeState);
+    this._deleteButton.addEventListener("click", this._deleteCard);
+    this._cardPhoto.addEventListener("click", () =>
+      this._handleImageClick(this._cardObj)
+    );
+  };
 
   generateCard = () => {
     // Stores card element in local property
@@ -69,5 +74,5 @@ export class Card {
     this._addEventListeners();
 
     return this._cardElement;
-  }
+  };
 }

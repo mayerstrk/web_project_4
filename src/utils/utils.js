@@ -48,10 +48,6 @@ function closeWithEsc(evt) {
   }
 }
 
-function resetValidation(formValidator) {
-  formValidator.resetValidation();
-}
-
 export {
   openModal,
   closeModal,

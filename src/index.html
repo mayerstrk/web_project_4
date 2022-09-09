@@ -1,37 +1,50 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Prototype for a social media platform for sharing photos" />
+    <meta
+      name="description"
+      content="Prototype for a social media platform for sharing photos"
+    />
     <meta name="author" content="Mayer Starkman" />
     <meta
       name="keywords"
       content="Practicum100, practicum, yandex, HTML, CSS, JavaScript, JS, web development, project 4"
     />
-    <link rel="stylesheet" href="./pages/index.css" />
-    <link rel="shotcut icon" href="./favicon.ico" type="image/x-icon" />
     <title>Around the U.S.</title>
   </head>
 
   <body class="body">
     <div class="page">
       <header class="header">
-        <img src="./images/header/__logo.svg" alt='"Around the U.S." logo' class="header__logo">
+        <img
+          src="<%= require('./images/header/__logo.svg')%>"
+          alt='"Around the U.S." logo'
+          class="header__logo"
+        />
       </header>
 
       <main class="content">
         <section class="profile">
-          <img src="./images/profile/__picture.png" alt="Profile picture" class="profile__picture">
+          <img
+            src="<%= require('./images/profile/__picture.png')%>"
+            alt="Profile picture"
+            class="profile__picture"
+          />
           <div class="profile__info">
             <div class="profile__name-container">
               <h1 class="profile__name">Jackes Cousteau</h1>
               <button type="button" class="profile__edit-button"></button>
             </div>
-          <p class="profile__about">Explorer</p>
+            <p class="profile__about">Explorer</p>
           </div>
           <button type="button" class="profile__add-button">
-            <img src="./images/profile/__add-button.svg" alt="add button" class="profile__add-plus-sign">
+            <img
+              src="<%= require('./images/profile/__add-button.svg')%>"
+              alt="add button"
+              class="profile__add-plus-sign"
+            />
           </button>
         </section>
 
@@ -40,7 +53,7 @@
             <template id="card">
               <li class="card">
                 <div class="card__photo-container">
-                  <img alt="Place goes here" class="card__photo">
+                  <img alt="Place goes here" class="card__photo" />
                   <button type="button" class="card__delete-button"></button>
                 </div>
                 <div class="card__bar">
@@ -60,15 +73,36 @@
 
     <div class="modal modal_type_edit">
       <div class="modal__window modal__window_type_edit">
-        <button type="button" class="modal__close-button modal__close-button_for_edit-form"></button>
+        <button
+          type="button"
+          class="modal__close-button modal__close-button_for_edit-form"
+        ></button>
         <h3 class="modal__title">Edit Profile</h3>
         <form class="form form_type_edit" name="edit-profile">
           <div class="form__input-container">
-            <input type="text" id="input-name" name="name" minlength="2" maxlength="40" placeholder="Name" class="form__input form__input_valid form__input_type_name" required>
+            <input
+              type="text"
+              id="input-name"
+              name="name"
+              minlength="2"
+              maxlength="40"
+              placeholder="Name"
+              class="form__input form__input_valid form__input_type_name"
+              required
+            />
             <span class="form__error form__error_type_name">.</span>
           </div>
           <div class="form__input-container">
-            <input type="text" id="input-about" name="about" minlength="2" maxlength="200" placeholder="Caption" class="form__input form__input_valid form__input_type_about" required>
+            <input
+              type="text"
+              id="input-about"
+              name="about"
+              minlength="2"
+              maxlength="200"
+              placeholder="Caption"
+              class="form__input form__input_valid form__input_type_about"
+              required
+            />
             <span class="form__error form__error_type_about">.</span>
           </div>
           <button type="submit" class="form__button">Save</button>
@@ -78,15 +112,33 @@
 
     <div class="modal modal_type_add">
       <div class="modal__window modal__window_type_add">
-        <button type="button" class="modal__close-button modal__close-button_for_add-form"></button>
+        <button
+          type="button"
+          class="modal__close-button modal__close-button_for_add-form"
+        ></button>
         <h3 class="modal__title">New Place</h3>
         <form novalidate class="form form_type_add" name="add-card">
           <div class="form__input-container">
-            <input type="text" maxlength="30" id="input-title" name="title" placeholder="Title" class="form__input form__input_valid form__input_type_title" required>
+            <input
+              type="text"
+              maxlength="30"
+              id="input-title"
+              name="title"
+              placeholder="Title"
+              class="form__input form__input_valid form__input_type_title"
+              required
+            />
             <span class="form__error form__error_type_title">.</span>
           </div>
           <div class="form__input-container">
-            <input type="url" id="input-url" name="url" placeholder="Image URL" class="form__input form__input_valid form__input_type_url" required>
+            <input
+              type="url"
+              id="input-url"
+              name="url"
+              placeholder="Image URL"
+              class="form__input form__input_valid form__input_type_url"
+              required
+            />
             <span class="form__error form__error_type_url">.</span>
           </div>
           <button type="submit" class="form__button">Create</button>
@@ -94,16 +146,19 @@
       </div>
     </div>
 
-      <div class="modal modal_type_card">
-        <div class="modal__window modal__window_type_card card-modal">
-          <div class="card-modal__photo-container">
-            <button type="button" class="modal__close-button modal__close-button_for_card-modal"></button>
-            <img class="card-modal__photo"/>
-          </div>
-          <h2 class="card-modal__photo-caption"></h2>
+    <div class="modal modal_type_card">
+      <div class="modal__window modal__window_type_card card-modal">
+        <div class="card-modal__photo-container">
+          <button
+            type="button"
+            class="modal__close-button modal__close-button_for_card-modal"
+          ></button>
+          <img class="card-modal__photo" />
         </div>
+        <h2 class="card-modal__photo-title"></h2>
       </div>
-      
-    <script type="module" src="./scripts/index.js"></script>
+    </div>
+
+    <!-- <script type="module" src="./src/index.js"></script> -->
   </body>
 </html>
