@@ -23,5 +23,6 @@ export default class PopupWithImage extends Popup {
     super.open();
     this._titleElement.textContent = title;
     this._imageElement.src = url;
+    this._imageElement.alt = `Photo of ${title}`;
   }
 }

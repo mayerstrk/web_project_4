@@ -1,8 +1,6 @@
 export default class Card {
   constructor(settings, cardObj, handleImageClick) {
     this._handleImageClick = handleImageClick;
-    // I need cardObj to be a parameter to handleImageClick when adding event listeners
-    this._cardObj = cardObj;
     this._name = cardObj.title;
     this._link = cardObj.url;
     this._templateSelector = settings.templateSelector;
@@ -52,7 +50,7 @@ export default class Card {
     this._likeButton.addEventListener("click", this._toggleLikeState);
     this._deleteButton.addEventListener("click", this._deleteCard);
     this._cardPhoto.addEventListener("click", () =>
-      this._handleImageClick(this._cardObj)
+      this._handleImageClick({title: this._name, url: this._link})
     );
   };
 

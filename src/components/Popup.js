@@ -19,7 +19,7 @@ export default class Popup {
   };
 
   _handleClickOutClose = (e) => {
-    if (e.target.classList.contains(this._popupClass)) {
+    if (e.target === e.currentTarget) {
       this.close();
     }
   };
