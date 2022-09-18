@@ -1,6 +1,7 @@
 export default class Card {
   constructor(settings, cardObj, handleImageClick) {
     this._handleImageClick = handleImageClick;
+    // I need cardObj to be a parameter to handleImageClick when adding event listeners
     this._cardObj = cardObj;
     this._name = cardObj.title;
     this._link = cardObj.url;

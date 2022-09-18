@@ -8,8 +8,8 @@ import {
   initialCards,
   cardSettings,
   validationSettings,
-  editPopupSettings,
-  addPopupSettings,
+  editProfilePopupSettings,
+  addCardPopupSettings,
   cardPopupSettings,
   userInfoSettings,
   placesCardsSelector,
@@ -20,12 +20,16 @@ const handleImageClick = (cardObj) => {
   cardPopup.open(cardObj);
 };
 
+const createCard = (cardObj) => {
+  const cardInstance = new Card(cardSettings, cardObj, handleImageClick)
+  return cardInstance.generateCard();
+}
+
 const cardsSection = new Section(
   {
     items: initialCards,
     renderer: (item) => {
-      const cardInstance = new Card(cardSettings, item, handleImageClick);
-      const cardElement = cardInstance.generateCard();
+      const cardElement = createCard(item);
       cardsSection.addItem(cardElement);
     },
   },
@@ -34,57 +38,49 @@ const cardsSection = new Section(
 
 cardsSection.renderItems();
 
-const editForm = document.querySelector(".form_type_edit");
-const addForm = document.querySelector(".form_type_add");
+const editProfileForm = document.querySelector(".form_type_edit");
+const addCardForm = document.querySelector(".form_type_add");
 
-const editFormValidator = new FormValidator(editForm, validationSettings);
-const addFormValidator = new FormValidator(addForm, validationSettings);
+const editProfileFormValidator = new FormValidator(editProfileForm, validationSettings);
+const addCardFormValidator = new FormValidator(addCardForm, validationSettings);
 
-editFormValidator.enableValidation();
-addFormValidator.enableValidation();
-console.log(editFormValidator._currentStates);
+editProfileFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
 
 const userInfo = new UserInfo(userInfoSettings);
 
-const editPopup = new PopupWithForm({
-  settings: editPopupSettings,
-  handleSubmit: () => {
-    const inputValues = editPopup.getInputValues();
+const editProfilePopup = new PopupWithForm({
+  settings: editProfilePopupSettings,
+  handleSubmit: (inputValues) => {
     userInfo.setUserInfo(inputValues);
-    editPopup.close();
-    editPopup.setInputValues(inputValues);
-    editFormValidator.updateCurrentStates();
+    editProfilePopup.close();
+    editProfileFormValidator.updateCurrentStates();
     // how should i reset validation everytime I close the popup? I can't seem to figure it out
     // other than adding a handleClose parameter to the constructor or duplicating the resetValidation
     // code inside the popup class
   },
 });
 
-const addPopup = new PopupWithForm({
-  settings: addPopupSettings,
-  handleSubmit: () => {
-    const cardObj = addPopup.getInputValues();
-    const cardInstance = new Card(cardSettings, cardObj, handleImageClick);
-    const cardElement = cardInstance.generateCard();
+const addCardPopup = new PopupWithForm({
+  settings: addCardPopupSettings,
+  handleSubmit: (inputValues) => {
+    const cardElement = createCard(inputValues)
     cardsSection.addItem(cardElement);
-    addPopup.close();
-    // how should i reset validation everytime I close the popup? I can't seem to figure it out
-    // other than adding a handleClose parameter to the constructor or duplicating the resetValidation
-    // code inside the popup class
+    addCardPopup.close();
   },
 });
 
 const cardPopup = new PopupWithImage(cardPopupSettings);
 
-const editButton = document.querySelector(".profile__edit-button");
-editButton.addEventListener("click", () => {
-  editFormValidator.resetValidation();
-  editPopup.setInputValues(userInfo.getUserInfo());
-  editPopup.open();
+const editProfileButton = document.querySelector(".profile__edit-button");
+editProfileButton.addEventListener("click", () => {
+  editProfileFormValidator.resetValidation();
+  editProfilePopup.setInputValues(userInfo.getUserInfo());
+  editProfilePopup.open();
 });
 
-const addButton = document.querySelector(".profile__add-button");
-addButton.addEventListener("click", () => {
-  addFormValidator.resetValidation();
-  addPopup.open();
+const addCardButton = document.querySelector(".profile__add-button");
+addCardButton.addEventListener("click", () => {
+  addCardFormValidator.resetValidation();
+  addCardPopup.open();
 });

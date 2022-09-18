@@ -9,6 +9,7 @@ export default class Popup {
     this._popupClass = popupClass;
     this._visibleClass = visibleClass;
     this._closeButtonSelector = closeButtonSelector;
+    this.close = this.close.bind(this);
   }
 
   _handleEscClose = (e) => {
@@ -31,7 +32,7 @@ export default class Popup {
     );
     this._popupElement
       .querySelector(this._closeButtonSelector)
-      .removeEventListener("click", () => this.close());
+      .removeEventListener("click", this.close);
   }
 
   setEventListeners() {
@@ -39,7 +40,7 @@ export default class Popup {
     this._popupElement.addEventListener("mousedown", this._handleClickOutClose);
     this._popupElement
       .querySelector(this._closeButtonSelector)
-      .addEventListener("click", () => this.close());
+      .addEventListener("click", this.close);
   }
 
   open() {

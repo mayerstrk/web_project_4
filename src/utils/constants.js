@@ -57,12 +57,12 @@ const popupSettings = {
   submitButtonSelector: ".form__button",
 };
 
-const editPopupSettings = {
+const editProfilePopupSettings = {
   __proto__: popupSettings,
   popupSelector: ".modal_type_edit",
 };
 
-const addPopupSettings = {
+const addCardPopupSettings = {
   __proto__: popupSettings,
   popupSelector: ".modal_type_add",
 };
@@ -82,8 +82,8 @@ export {
   cardSettings,
   validationSettings,
   popupSettings,
-  editPopupSettings,
-  addPopupSettings,
+  editProfilePopupSettings,
+  addCardPopupSettings,
   cardPopupSettings,
   userInfoSettings,
   placesCardsSelector,
