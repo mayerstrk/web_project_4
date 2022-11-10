@@ -27,17 +27,21 @@
 
       <main class="content">
         <section class="profile">
-          <img
-            src="<%= require('./images/profile/__picture.png')%>"
-            alt="Profile picture"
-            class="profile__picture"
-          />
+          <!-- <div class="profile__avatar-container"> -->
+            <img
+              src=""
+              alt="Profile picture"
+              class="profile__avatar"
+            />
+            <!-- <div class="profile__avatar-button">
+            </div>
+          </div> -->
           <div class="profile__info">
             <div class="profile__name-container">
-              <h1 class="profile__name">Jackes Cousteau</h1>
-              <button type="button" class="profile__edit-button"></button>
+              <h1 class="profile__name"></h1>
+              <button type="button" class="profile__edit-button">pop</button>
             </div>
-            <p class="profile__about">Explorer</p>
+            <p class="profile__about"></p>
           </div>
           <button type="button" class="profile__add-button">
             <img
@@ -58,7 +62,10 @@
                 </div>
                 <div class="card__bar">
                   <h2 class="card__name"></h2>
-                  <button type="button" class="card__like-button"></button>
+                  <div class="card__likesContainer">
+                    <button type="button" class="card__like-button"></button>
+                    <p class="card__likes"></p>
+                  </div>
                 </div>
               </li>
             </template>
@@ -95,7 +102,7 @@
           <div class="form__input-container">
             <input
               type="text"
-              id="input-about"
+              id="input-profileAbout"
               name="about"
               minlength="2"
               maxlength="200"
@@ -122,9 +129,9 @@
             <input
               type="text"
               maxlength="30"
-              id="input-title"
-              name="title"
-              placeholder="Title"
+              id="input-cardName"
+              name="name"
+              placeholder="Name"
               class="form__input form__input_valid form__input_type_title"
               required
             />
@@ -133,8 +140,8 @@
           <div class="form__input-container">
             <input
               type="url"
-              id="input-url"
-              name="url"
+              id="input-link"
+              name="link"
               placeholder="Image URL"
               class="form__input form__input_valid form__input_type_url"
               required
@@ -159,6 +166,39 @@
       </div>
     </div>
 
-    <!-- <script type="module" src="./src/index.js"></script> -->
+    <div class="modal modal_type_delete-card">
+      <div class="modal__window modal__window_type_delete-card">
+        <button
+          type="button"
+          class="modal__close-button modal__close-button_for_delete-card"
+        ></button>
+        <h3 class="modal__title modal__title_type_delete-card">Are you sure?</h3>
+        <form novalidate class="form form_type_delete-card" name="delete-card">
+          <button type="submit" class="form__button">Yes</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal modal_type_avatar">
+      <div class="modal__window modal__window_type_avatar">
+        <button type="button" class="modal__close-button modal__close-button_for_avatar"></button>
+        <h3 class="modal__title modal__title_type_avatar">Change profile picture</h3>
+        <form novalidate class="form form_type_avatar" name="avatar">
+          <div class="form__input-container">
+            <input
+              type="url"
+              id="input-profileUrl"
+              name="link"
+              placeholder="Image URL"
+              class="form__input form__input_valid form__input_type_url"
+              required
+            />
+            <span class="form__error form__error_type_url">.</span>
+             <button type="submit" class="form__button">Save</button>
+          </div>
+        </form>
+
+      </div>
+    </div>
   </body>
 </html>

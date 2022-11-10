@@ -1,3 +1,5 @@
+import { userInfoSettings } from "../utils/constants";
+
 export default class FormValidator {
   constructor(form, settings) {
     this._form = form;
@@ -27,9 +29,13 @@ export default class FormValidator {
     errorElement.textContent = input.validationMessage;
   }
 
-  _disableButton() {
+  replaceButtonText() {
+    this._buttonElement.textContent = "Saving..."
+  }
+
+  disableButton(dontApplyClass) {
     this._buttonElement.disabled = true;
-    this._buttonElement.classList.add(this._inactiveButtonClass);
+    if (!dontApplyClass){this._buttonElement.classList.add(this._inactiveButtonClass)}
   }
 
   _enableButton() {
@@ -43,7 +49,7 @@ export default class FormValidator {
 
   _handleNotValid(input, errorElement) {
     this._showError(input, errorElement);
-    this._disableButton();
+    this.disableButton();
   }
 
   _handleIsValid(input, errorElement) {
@@ -72,7 +78,7 @@ export default class FormValidator {
     if (this._isValid(input)) {
       this._handleIsValid(input, errorElement);
       if (this._haveSameState(this._inputs)) {
-        this._disableButton();
+        this.disableButton();
       }
     } else {
       this._handleNotValid(input, errorElement);
@@ -107,7 +113,7 @@ export default class FormValidator {
     this._initializeInputs();
     this._initializeCurrentStates();
     this._setEventListeners();
-    this._disableButton();
+    this.disableButton();
   }
 
   _hideAllFormErrors() {
@@ -118,7 +124,7 @@ export default class FormValidator {
   }
 
   resetValidation() {
-    this._disableButton();
+    this.disableButton();
     this._form.reset();
     this._hideAllFormErrors();
   }

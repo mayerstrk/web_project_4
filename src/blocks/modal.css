@@ -11,7 +11,7 @@
   visibility: hidden;
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  transition: visibility 0.2s, opacity 0.2s linear;
+  transition: visibility 0.2s opacity 0.2s linear;
 }
 
 .modal_visible {
@@ -69,6 +69,10 @@
   line-height: 29px;
   font-weight: 900;
   font-family: "Inter", Arial, sans-serif;
+}
+
+.modal__title_type_delete-card {
+  margin: 0 0 20px;
 }
 
 @media screen and (max-width: 600px) {

@@ -1,3 +1,8 @@
+const profileSettings = {
+  templateSelector: "#profile",
+  sectionSelector: ".profile",
+}
+
 const initialCards = [
   {
     title: "Lago di Braies",
@@ -33,7 +38,9 @@ const cardSettings = {
   likeButtonActiveClass: "card__like-button_active",
   likeButtonSelector: ".card__like-button",
   deleteButtonSelector: ".card__delete-button",
+  deleteButtonActiveClass: "card__delete-button_active",
   imageContainerSelector: ".card__photo-container",
+  likesSelector: ".card__likes"
 };
 
 const validationSettings = {
@@ -72,18 +79,32 @@ const cardPopupSettings = {
   popupSelector: ".modal_type_card",
 };
 
+const deleteCardPopupSettings = {
+  __proto__: popupSettings,
+  popupSelector: ".modal_type_delete-card"
+}
+
+const avatarPopupSettings = {
+  __proto__: popupSettings,
+  popupSelector: ".modal_type_avatar",
+};
+
 const userInfoSettings = {
   nameSelector: ".profile__name",
   aboutSelector: ".profile__about",
+  avatarSelector: ".profile__avatar"
 };
 
 export {
+  profileSettings,
   initialCards,
   cardSettings,
   validationSettings,
   popupSettings,
   editProfilePopupSettings,
   addCardPopupSettings,
+  deleteCardPopupSettings,
+  avatarPopupSettings,
   cardPopupSettings,
   userInfoSettings,
   placesCardsSelector,
