@@ -27,7 +27,7 @@ const avatarForm = document.querySelector(".form_type_avatar");
 const avatarFormValidator = new FormValidator(avatarForm, validationSettings);
 avatarFormValidator.enableValidation();
 
-const avatarImage = document.querySelector(".profile__avatar");
+const avatarImage = document.querySelector(".profile__avatar-container");
 avatarImage.addEventListener("click", () => {
   avatarFormValidator.resetValidation();
   avatarPopup.open();
@@ -37,9 +37,10 @@ const avatarPopup = new PopupWithForm({
   settings: avatarPopupSettings,
   handleSubmit: ({ link }) => {
     const urlSuffix = "users/me/avatar";
-    console.log(link);
+    // console.log(link);
     api.patchAvatar(urlSuffix, link).then((res) => {
-      userInfo.setUserInfo(res);
+      console.log(res)
+      userInfo.setUserAvatar(res);
     });
     avatarPopup.close();
   },
