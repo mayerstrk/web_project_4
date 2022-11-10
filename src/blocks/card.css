@@ -38,7 +38,7 @@
   transition: all 0.2s ease-out;
   cursor: pointer;
   visibility: hidden;
-  opacity: 0
+  opacity: 0;
 }
 
 .card__delete-button:hover {
@@ -69,7 +69,6 @@
   font-size: 24px;
   line-height: 29px;
   font-weight: 900;
-  line-height: 29px;
 }
 
 .card__like-button {
