@@ -2,7 +2,7 @@ export default class Card {
   constructor(settings, { name, link, likes , _id, owner }, userId, handleImageClick, handleDeleteCardClick, handleLikeButtonClick) {
     this._handleImageClick = handleImageClick;
     this._handleDeleteCardClick = handleDeleteCardClick;
-    this._onLike = handleLikeButtonClick;
+    this._handleLike = handleLikeButtonClick;
     this._id = _id;
     this._name = name;
     this._link = link;
@@ -16,6 +16,16 @@ export default class Card {
     this._likesSelector = settings.likesSelector
     this._deleteButtonSelector = settings.deleteButtonSelector;
     this._deleteButtonActiveClass = settings.deleteButtonActiveClass
+  }
+
+  getId() {
+    return this._id
+  }
+
+  updateLikes(likesCount) {
+    this._likesCount = likesCount
+    this._likesElement.textContent = this._likesCount;
+    this._likeButton.classList.toggle(this._likeButtonActiveClass);
   }
 
   _createCardElement = () => {
@@ -40,16 +50,6 @@ export default class Card {
     this._deleteButton.classList.add(this._deleteButtonActiveClass)
   }
 
-  _handleLike = () => {
-    this._onLike({
-      cardId: this._id,
-      likeState: this._likeState,
-      likesElement: this._likesElement,
-      likeButton: this._likeButton,
-      likeButtonActiveClass: this._likeButtonActiveClass,
-    })
-  };
-
   _hasUserLiked = () => {
     for (let i = 0; i < this._likes.length; i++) {
       const likeUser = this._likes[i];
@@ -68,7 +68,7 @@ export default class Card {
   };
 
   _addEventListeners = () => {
-    this._likeButton.addEventListener("click", this._handleLike);
+    this._likeButton.addEventListener("click", () => this._handleLike(this));
     this._deleteButton.addEventListener("click", this._deleteCard);
     this._cardPhoto.addEventListener("click", () =>
       this._handleImageClick({title: this._name, url: this._link})

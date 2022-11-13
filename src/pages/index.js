@@ -1,6 +1,6 @@
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
-import Api from "../components/Api.js";
+import aroundTheUsClient from "../components/aroundTheUsClient.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupDeleteCard from "../components/PopupDeleteCard.js";
@@ -14,50 +14,81 @@ import {
   deleteCardPopupSettings,
   avatarPopupSettings,
   cardPopupSettings,
+  appErrorPopupSettings,
   userInfoSettings,
   placesCardsSelector,
 } from "../utils/constants.js";
 import "./index.css";
+import PopupAppError from "../components/PopupAppError.js";
+
+const popupAppError = new PopupAppError(appErrorPopupSettings);
+
+const apiCatchHandler = (err) => {
+  console.log(err);
+  popupAppError.setMessage(err);
+  popupAppError.open();
+};
+
+const apiFinallyHandler = () =>
+  addCardPopup.setButtonText(addCardPopup.buttonText);
 
 const userInfo = new UserInfo(userInfoSettings);
 
 const cardPopup = new PopupWithImage(cardPopupSettings);
 
-const avatarForm = document.querySelector(".form_type_avatar");
-const avatarFormValidator = new FormValidator(avatarForm, validationSettings);
-avatarFormValidator.enableValidation();
+const formValidators = {};
+
+const enableValidation = (config) => {
+  const formList = [...document.querySelectorAll(config.formSelector)];
+  formList.forEach((formElement) => {
+    const formName = formElement.getAttribute("name");
+    if (formName !== "delete-card") {
+      const validator = new FormValidator(formElement, config);
+      formValidators[formName] = validator;
+      validator.enableValidation();
+    }
+  });
+};
+
+enableValidation(validationSettings);
 
 const avatarImage = document.querySelector(".profile__avatar-container");
 avatarImage.addEventListener("click", () => {
-  avatarFormValidator.resetValidation();
+  formValidators["avatar"].resetValidation();
   avatarPopup.open();
 });
 
 const avatarPopup = new PopupWithForm({
   settings: avatarPopupSettings,
   handleSubmit: ({ link }) => {
-    const urlSuffix = "users/me/avatar";
-    // console.log(link);
-    api.patchAvatar(urlSuffix, link).then((res) => {
-      console.log(res)
-      userInfo.setUserAvatar(res);
-    });
-    avatarPopup.close();
+    aroundClient
+      .patchAvatar(link)
+      .then((res) => {
+        console.log(res);
+        userInfo.setUserInfo(res);
+        avatarPopup.close();
+      })
+      .catch(apiCatchHandler)
+      .finally(apiFinallyHandler);
   },
 });
 
 const deleteCardPopup = new PopupDeleteCard({
   settings: deleteCardPopupSettings,
-  handleSubmit: (urlSuffix, cardElement) => {
-    api.deleteCard(urlSuffix);
-    cardElement.remove();
-    cardElement = null;
-    deleteCardPopup.close();
+  handleSubmit: (cardId, cardElement) => {
+    aroundClient
+      .deleteCard(cardId)
+      .then(() => {
+        cardElement.remove();
+        cardElement = null;
+        deleteCardPopup.close();
+      })
+      .catch(apiCatchHandler);
   },
 });
 
-const api = new Api({
-  baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en/",
+const aroundClient = new aroundTheUsClient({
+  baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en",
   baseHeaders: {
     authorization: "0025f74a-7d55-4e26-bbb6-faf6f78aefcc",
   },
@@ -66,66 +97,59 @@ const api = new Api({
 function initAddCard(cardsSection, createCard, userId) {
   const addCardPopup = new PopupWithForm({
     settings: addCardPopupSettings,
-    handleSubmit: (inputValues, buttonText) => {
-      addCardFormValidator.disableButton(true);
-      api.postNewCard("cards", inputValues).then((cardObj) => {
-        const cardElement = createCard(cardObj, userId);
-        cardsSection.addItem(cardElement, "prepend");
-        addCardPopup.close();
-        addCardPopup.setButtonText(buttonText);
-
-      });
+    handleSubmit: (inputValues) => {
+      formValidators["add-card"].disableButton(true);
+      aroundClient
+        .postNewCard(inputValues)
+        .then((cardObj) => {
+          const cardElement = createCard(cardObj, userId);
+          cardsSection.addItem(cardElement, "prepend");
+          addCardPopup.close();
+        })
+        .catch(apiCatchHandler)
+        .finally(apiFinallyHandler);
     },
   });
 
-  const addCardForm = document.querySelector(".form_type_add");
-  const addCardFormValidator = new FormValidator(
-    addCardForm,
-    validationSettings
-  );
-  addCardFormValidator.enableValidation();
-
   const addCardButton = document.querySelector(".profile__add-button");
-
   addCardButton.addEventListener("click", () => {
-    addCardFormValidator.resetValidation();
+    formValidators["add-card"].resetValidation();
     addCardPopup.open();
   });
 }
 
 function initEditProfile() {
+  /**
+   *
+   * @param {object} inputValues
+   * @returns {Promise}
+   */
   const updateProfile = (inputValues) => {
-    api
-      .patchProfile("users/me", inputValues)
-      .then(() => api.fetchUserInfo("users/me"))
-      .then((data) => userInfo.setUserInfo(data));
+    return aroundClient
+      .patchProfile(inputValues)
+      .then((data) => userInfo.setUserInfo(data))
+      .catch(apiCatchHandler)
+      .finally(apiFinallyHandler);
   };
-
-  const editProfileForm = document.querySelector(".form_type_edit");
-
-  const editProfileFormValidator = new FormValidator(
-    editProfileForm,
-    validationSettings
-  );
 
   const editProfileButton = document.querySelector(".profile__edit-button");
   editProfileButton.addEventListener("click", () => {
-    editProfileFormValidator.resetValidation();
+    formValidators["edit-profile"].resetValidation();
     editProfilePopup.setInputValues(userInfo.getUserInfo());
-    editProfileFormValidator.updateCurrentStates();
+    formValidators["edit-profile"].updateCurrentStates();
     editProfilePopup.open();
   });
 
   const editProfilePopup = new PopupWithForm({
     settings: editProfilePopupSettings,
     handleSubmit: (inputValues) => {
-      updateProfile(inputValues);
-      editProfileFormValidator.updateCurrentStates();
+      updateProfile(inputValues).finally(() =>
+        editProfilePopup.setButtonText(editProfilePopup.buttonText)
+      );
+      formValidators["edit-profile"].updateCurrentStates();
       editProfilePopup.close();
     },
   });
-
-  editProfileFormValidator.enableValidation();
 }
 
 function renderApp() {
@@ -146,39 +170,36 @@ function renderApp() {
   };
 
   const handleDeleteCardClick = (cardId, cardElement) => {
-    const urlSuffix = "cards/" + cardId;
-    deleteCardPopup.open(urlSuffix, cardElement);
+    deleteCardPopup.open(cardId, cardElement);
   };
 
-  const handleLikeButtonClick = ({
-    cardId,
-    likesElement,
-    likeButton,
-    likeButtonActiveClass,
-  }) => {
-    const urlSuffix = "cards/likes/" + cardId;
-    const likeState = likeButton.classList.contains(likeButtonActiveClass);
+  const handleLikeButtonClick = (card) => {
+    const likeState = card._likeButton.classList.contains(
+      card._likeButtonActiveClass
+    );
     if (likeState) {
-      api.deleteLike(urlSuffix).then((cardObj) => {
-        likesElement.textContent = cardObj.likes.length;
-        likeButton.classList.remove(likeButtonActiveClass);
-      });
+      aroundClient
+        .deleteLike(card.getId())
+        .then((cardObj) => {
+          card.updateLikes(cardObj.likes.length);
+        })
+        .catch(apiCatchHandler);
     } else {
-      api.addLike(urlSuffix).then((cardObj) => {
-        likesElement.textContent = cardObj.likes.length;
-        likeButton.classList.add(likeButtonActiveClass);
-      });
+      aroundClient
+        .addLike(card.getId())
+        .then((cardObj) => {
+          card.updateLikes(cardObj.likes.length);
+        })
+        .catch(apiCatchHandler);
     }
   };
 
-  api
+  aroundClient
     .fetchData({
       userInfoSuffix: "users/me",
-      cardsSuffix: "cards",
     })
     .then(([userData, cardsData]) => {
       userInfo.setUserInfo(userData);
-      console.log(cardsData);
       const cardsSection = new Section(
         {
           items: cardsData,
@@ -193,8 +214,8 @@ function renderApp() {
       cardsSection.renderItems();
       initAddCard(cardsSection, createCard, userData._id);
       initEditProfile();
-    });
+    })
+    .catch(apiCatchHandler);
 }
 
 renderApp();
-initEditProfile();

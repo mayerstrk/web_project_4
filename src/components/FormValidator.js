@@ -29,13 +29,9 @@ export default class FormValidator {
     errorElement.textContent = input.validationMessage;
   }
 
-  replaceButtonText() {
-    this._buttonElement.textContent = "Saving..."
-  }
-
   disableButton(dontApplyClass) {
     this._buttonElement.disabled = true;
-    if (!dontApplyClass){this._buttonElement.classList.add(this._inactiveButtonClass)}
+    if (!dontApplyClass) {this._buttonElement.classList.add(this._inactiveButtonClass)}
   }
 
   _enableButton() {

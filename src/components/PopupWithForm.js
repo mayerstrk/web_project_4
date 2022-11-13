@@ -10,6 +10,7 @@ export default class PopupWithForm extends Popup {
     this._submitButton = this._form.querySelector(
       settings.submitButtonSelector
     );
+    this.buttonText = this._submitButton.textContent;
     this._onSubmit = handleSubmit;
   }
 
@@ -19,9 +20,8 @@ export default class PopupWithForm extends Popup {
 
   _handleSubmit = (e) => {
     e.preventDefault();
-    const buttonText = this._submitButton.textContent;
     this.setButtonText("Saving...");
-    this._onSubmit(this._getInputValues(), buttonText);
+    this._onSubmit(this._getInputValues());
   };
 
   _getInputValues() {

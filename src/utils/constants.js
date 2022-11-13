@@ -56,7 +56,6 @@ const validationSettings = {
 };
 
 const popupSettings = {
-  popupClass: "modal",
   visibleClass: "modal_visible",
   closeButtonSelector: ".modal__close-button",
   formSelector: ".form",
@@ -89,6 +88,13 @@ const avatarPopupSettings = {
   popupSelector: ".modal_type_avatar",
 };
 
+const appErrorPopupSettings = {
+  popupSelector: ".app-error",
+  visibleClass: "app-error_visible",
+  closeButtonSelector: ".app-error__close-button",
+  textElementSelector: ".app-error__text"
+}
+
 const userInfoSettings = {
   nameSelector: ".profile__name",
   aboutSelector: ".profile__about",
@@ -106,6 +112,7 @@ export {
   deleteCardPopupSettings,
   avatarPopupSettings,
   cardPopupSettings,
+  appErrorPopupSettings,
   userInfoSettings,
   placesCardsSelector,
 };

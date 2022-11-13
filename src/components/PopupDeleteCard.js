@@ -14,7 +14,7 @@ export default class PopupDeleteCard extends Popup {
 
   _handleSubmit = (e) => {
     e.preventDefault();
-    this._onSubmit(this._cardUrlSuffix, this._cardElement);
+    this._onSubmit(this._cardId, this._cardElement);
   };
 
   setEventListeners = () => {
@@ -27,9 +27,9 @@ export default class PopupDeleteCard extends Popup {
     this._form.removeEventListener("submit", this._handleSubmit);
   };
 
-  open(cardUrlSuffix, cardElement) {
+  open(cardId, cardElement) {
     super.open();
-    this._cardUrlSuffix = cardUrlSuffix;
+    this._cardId = cardId;
     this._cardElement = cardElement
   }
 }
