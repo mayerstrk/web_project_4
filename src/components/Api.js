@@ -1,16 +1,19 @@
-
 export default class Api {
-  constructor({baseUrl, baseHeaders}) {
+  constructor({ baseUrl, baseHeaders }) {
     this._baseUrl = baseUrl;
     this._baseHeaders = baseHeaders;
   }
-  
+
   _checkResponse(res) {
-    if (res.ok) { return res.json() }
-    return Promise.reject(`Error ${res.status} - ${res.statusText}`)
+    if (res.ok) {
+      return res.json();
+    }
+    const err = res;
+    return res.json()
+      .then((errJson) => Promise.reject(`(Error ${err.status} - ${err.statusText}) ${errJson.name} - ${errJson.message}`))
   }
-  
+
   _request(url, options) {
-    return fetch(url, options).then(this._checkResponse)
+    return fetch(url, options).then(this._checkResponse);
   }
-};
+}

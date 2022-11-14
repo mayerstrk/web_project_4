@@ -24,7 +24,6 @@ import PopupAppError from "../components/PopupAppError.js";
 const popupAppError = new PopupAppError(appErrorPopupSettings);
 
 const apiCatchHandler = (err) => {
-  console.log(err);
   popupAppError.setMessage(err);
   popupAppError.open();
 };
