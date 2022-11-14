@@ -14,6 +14,8 @@ export default class PopupAppError extends Popup {
     this._textElement.textContent = text;
   }
 
+  // I overide the method because I dont want the popup to close on esc key press or on click out, 
+  // is there a better way to do this?
   setEventListeners() {
     this._popupElement
       .querySelector(this._closeButtonSelector)

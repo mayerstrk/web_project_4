@@ -1,6 +1,6 @@
 import Api from './Api';
 
-export default class aroundTheUSClient extends Api {
+export default class AroundClient extends Api {
   constructor({ baseUrl, baseHeaders }) {
     super({ baseUrl, baseHeaders });
   }
@@ -25,23 +25,17 @@ export default class aroundTheUSClient extends Api {
    * @returns {object} {name, about, avatar, _id , cohort}
    */
   patchAvatar(avatarUrl) {
-    const headers = new Headers(this._baseHeaders);
-    headers.append("Content-Type", "application/json");
-
     return this._request(`${this._baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: headers,
+      headers: this._baseHeaders,
       body: JSON.stringify({ avatar: avatarUrl }),
     });
   }
 
   patchProfile({ name, about }) {
-    const headers = new Headers(this._baseHeaders);
-    headers.append("Content-Type", "application/json");
-
     return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
-      headers: headers,
+      headers: this._baseHeaders,
       body: JSON.stringify({
         name: name,
         about: about,
@@ -57,12 +51,9 @@ export default class aroundTheUSClient extends Api {
   }
 
   postNewCard({ name, link }) {
-    const headers = new Headers(this._baseHeaders);
-    headers.append("Content-Type", "application/json");
-
     return this._request(`${this._baseUrl}/cards`, {
       method: "POST",
-      headers: headers,
+      headers: this._baseHeaders,
       body: JSON.stringify({
         name: name,
         link: link,
@@ -71,12 +62,9 @@ export default class aroundTheUSClient extends Api {
   }
 
   getCards() {
-    const headers = new Headers(this._baseHeaders);
-    headers.append("Content-Type", "application/json");
-
     return this._request(`${this._baseUrl}/cards`, {
       method: "GET",
-      headers: headers,
+      headers: this._baseHeaders,
     });
   }
 

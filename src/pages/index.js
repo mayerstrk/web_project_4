@@ -1,6 +1,6 @@
 import Card from "../components/Card.js";
 import Section from "../components/Section.js";
-import aroundTheUsClient from "../components/aroundTheUsClient.js";
+import AroundClient from "../components/AroundClient.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import PopupDeleteCard from "../components/PopupDeleteCard.js";
@@ -23,12 +23,12 @@ import PopupAppError from "../components/PopupAppError.js";
 
 const popupAppError = new PopupAppError(appErrorPopupSettings);
 
-const apiCatchHandler = (err) => {
+const handleApiCatch = (err) => {
   popupAppError.setMessage(err);
   popupAppError.open();
 };
 
-const apiFinallyHandler = (popup) =>
+const handleApiFinally = (popup) =>
   popup.setButtonText(popup.buttonText);
 
 const userInfo = new UserInfo(userInfoSettings);
@@ -63,12 +63,11 @@ const avatarPopup = new PopupWithForm({
     aroundClient
       .patchAvatar(link)
       .then((res) => {
-        console.log(res);
         userInfo.setUserInfo(res);
         avatarPopup.close();
       })
-      .catch(apiCatchHandler)
-      .finally(() => apiFinallyHandler(avatarPopup));
+      .catch(handleApiCatch)
+      .finally(() => handleApiFinally(avatarPopup));
   },
 });
 
@@ -82,14 +81,15 @@ const deleteCardPopup = new PopupDeleteCard({
         cardElement = null;
         deleteCardPopup.close();
       })
-      .catch(apiCatchHandler);
+      .catch(handleApiCatch);
   },
 });
 
-const aroundClient = new aroundTheUsClient({
+const aroundClient = new AroundClient({
   baseUrl: "https://around.nomoreparties.co/v1/cohort-3-en",
   baseHeaders: {
     authorization: "0025f74a-7d55-4e26-bbb6-faf6f78aefcc",
+    'Content-Type': "application/json",
   },
 });
 
@@ -97,7 +97,6 @@ function initAddCard(cardsSection, createCard, userId) {
   const addCardPopup = new PopupWithForm({
     settings: addCardPopupSettings,
     handleSubmit: (inputValues) => {
-      formValidators["add-card"].disableButton(true);
       aroundClient
         .postNewCard(inputValues)
         .then((cardObj) => {
@@ -105,8 +104,8 @@ function initAddCard(cardsSection, createCard, userId) {
           cardsSection.addItem(cardElement, "prepend");
           addCardPopup.close();
         })
-        .catch(apiCatchHandler)
-        .finally(() => apiFinallyHandler(addCardPopup));
+        .catch(handleApiCatch)
+        .finally(() => handleApiFinally(addCardPopup));
     },
   });
 
@@ -127,14 +126,13 @@ function initEditProfile() {
     aroundClient
       .patchProfile(inputValues)
       .then((data) => userInfo.setUserInfo(data))
-      .catch(apiCatchHandler)
-      .finally(() => apiFinallyHandler(editProfilePopup));
+      .catch(handleApiCatch)
+      .finally(() => handleApiFinally(editProfilePopup));
 
   const editProfileButton = document.querySelector(".profile__edit-button");
   editProfileButton.addEventListener("click", () => {
     formValidators["edit-profile"].resetValidation();
     editProfilePopup.setInputValues(userInfo.getUserInfo());
-    formValidators["edit-profile"].updateCurrentStates();
     editProfilePopup.open();
   });
 
@@ -143,11 +141,10 @@ function initEditProfile() {
     handleSubmit: (inputValues) => {
       updateProfile(inputValues)
         .then(() => {
-          formValidators["edit-profile"].updateCurrentStates();
           editProfilePopup.close();
         })
-        .catch(apiCatchHandler)
-        .finally(() => apiFinallyHandler(editProfilePopup));
+        .catch(handleApiCatch)
+        .finally(() => handleApiFinally(editProfilePopup));
     },
   });
 }
@@ -174,8 +171,8 @@ function renderApp() {
   };
 
   const handleLikeButtonClick = (card) => {
-    const likeState = card._likeButton.classList.contains(
-      card._likeButtonActiveClass
+    const likeState = card.likeButton.classList.contains(
+      card.likeButtonActiveClass
     );
     if (likeState) {
       aroundClient
@@ -183,21 +180,19 @@ function renderApp() {
         .then((cardObj) => {
           card.updateLikes(cardObj.likes.length);
         })
-        .catch(apiCatchHandler);
+        .catch(handleApiCatch);
     } else {
       aroundClient
         .addLike(card.getId())
         .then((cardObj) => {
           card.updateLikes(cardObj.likes.length);
         })
-        .catch(apiCatchHandler);
+        .catch(handleApiCatch);
     }
   };
 
   aroundClient
-    .fetchData({
-      userInfoSuffix: "users/me",
-    })
+    .fetchData()
     .then(([userData, cardsData]) => {
       userInfo.setUserInfo(userData);
       const cardsSection = new Section(
@@ -215,7 +210,7 @@ function renderApp() {
       initAddCard(cardsSection, createCard, userData._id);
       initEditProfile();
     })
-    .catch(apiCatchHandler);
+    .catch(handleApiCatch);
 }
 
 renderApp();

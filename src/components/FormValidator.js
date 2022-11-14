@@ -29,6 +29,10 @@ export default class FormValidator {
     errorElement.textContent = input.validationMessage;
   }
 
+  /**
+   * 
+   * @param {boolean} dontApplyClass if true disabled class isn't applied
+   */
   disableButton(dontApplyClass) {
     this._buttonElement.disabled = true;
     if (!dontApplyClass) {this._buttonElement.classList.add(this._inactiveButtonClass)}
@@ -55,15 +59,15 @@ export default class FormValidator {
     }
   }
 
-  _haveSameState() {
-    return this._inputs.every((input) => this._hasSameState(input));
-  }
+  // _haveSameState() {
+  //   return this._inputs.every((input) => this._hasSameState(input));
+  // }
 
-  _hasSameState() {
-    return this._currentStates.every(
-      (val, i) => val === this._updatedStates[i]
-    );
-  }
+  // _hasSameState() {
+  //   return this._currentStates.every(
+  //     (val, i) => val === this._updatedStates[i]
+  //   );
+  // }
 
   _isValid(input) {
     return input.validity.valid;
@@ -73,24 +77,20 @@ export default class FormValidator {
     this._updatedStates = this._inputs.map((input) => input.value);
     if (this._isValid(input)) {
       this._handleIsValid(input, errorElement);
-      if (this._haveSameState(this._inputs)) {
-        this.disableButton();
-      }
+      // if (this._haveSameState(this._inputs)) {
+      //   this.disableButton();
+      // }
     } else {
       this._handleNotValid(input, errorElement);
     }
   }
 
-  updateCurrentStates() {
-    this._currentStates = this._inputs.map((input) => input.value);
-  }
+  // updateCurrentStates() {
+  //   this._currentStates = this._inputs.map((input) => input.value);
+  // }
 
   _initializeInputs() {
     this._inputs = [...this._form.querySelectorAll(this._inputSelector)];
-  }
-
-  _initializeCurrentStates() {
-    this._currentStates = this._inputs.map((input) => input.value);
   }
 
   _setEventListeners() {
@@ -107,7 +107,7 @@ export default class FormValidator {
     // we will pass the button element to each input so that we can disable it in the key press event handler
     this._buttonElement = this._form.querySelector(this._submitButtonSelector);
     this._initializeInputs();
-    this._initializeCurrentStates();
+    // this.updateCurrentStates();
     this._setEventListeners();
     this.disableButton();
   }

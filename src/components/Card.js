@@ -11,8 +11,8 @@ export default class Card {
     this._isOwner = owner._id === userId ? true : false;
     this._likesCount = this._likes.length;
     this._templateSelector = settings.templateSelector;
-    this._likeButtonSelector = settings.likeButtonSelector;
-    this._likeButtonActiveClass = settings.likeButtonActiveClass;
+    this.likeButtonSelector = settings.likeButtonSelector;
+    this.likeButtonActiveClass = settings.likeButtonActiveClass;
     this._likesSelector = settings.likesSelector
     this._deleteButtonSelector = settings.deleteButtonSelector;
     this._deleteButtonActiveClass = settings.deleteButtonActiveClass
@@ -25,7 +25,7 @@ export default class Card {
   updateLikes(likesCount) {
     this._likesCount = likesCount
     this._likesElement.textContent = this._likesCount;
-    this._likeButton.classList.toggle(this._likeButtonActiveClass);
+    this.likeButton.classList.toggle(this.likeButtonActiveClass);
   }
 
   _createCardElement = () => {
@@ -38,8 +38,8 @@ export default class Card {
   };
 
   _initializeButtons = () => {
-    this._likeButton = this._cardElement.querySelector(
-      this._likeButtonSelector
+    this.likeButton = this._cardElement.querySelector(
+      this.likeButtonSelector
     );
     this._deleteButton = this._cardElement.querySelector(
       this._deleteButtonSelector
@@ -59,7 +59,7 @@ export default class Card {
   }
 
   _renderLikes = () => {
-    if (this._likesCount && this._hasUserLiked()) { this._likeButton.classList.add(this._likeButtonActiveClass) }
+    if (this._likesCount && this._hasUserLiked()) { this.likeButton.classList.add(this.likeButtonActiveClass) }
     this._likesElement.textContent = this._likesCount
   }
 
@@ -68,7 +68,7 @@ export default class Card {
   };
 
   _addEventListeners = () => {
-    this._likeButton.addEventListener("click", () => this._handleLike(this));
+    this.likeButton.addEventListener("click", () => this._handleLike(this));
     this._deleteButton.addEventListener("click", this._deleteCard);
     this._cardPhoto.addEventListener("click", () =>
       this._handleImageClick({title: this._name, url: this._link})
