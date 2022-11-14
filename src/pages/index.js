@@ -143,11 +143,13 @@ function initEditProfile() {
   const editProfilePopup = new PopupWithForm({
     settings: editProfilePopupSettings,
     handleSubmit: (inputValues) => {
-      updateProfile(inputValues).finally(() =>
-        editProfilePopup.setButtonText(editProfilePopup.buttonText)
-      );
-      formValidators["edit-profile"].updateCurrentStates();
-      editProfilePopup.close();
+      updateProfile(inputValues)
+        .then(() => {
+          formValidators["edit-profile"].updateCurrentStates();
+          editProfilePopup.close();
+        })
+        .catch(apiCatchHandler)
+        .finally(apiFinallyHandler);
     },
   });
 }
