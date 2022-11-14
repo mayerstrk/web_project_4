@@ -29,8 +29,8 @@ const apiCatchHandler = (err) => {
   popupAppError.open();
 };
 
-const apiFinallyHandler = () =>
-  addCardPopup.setButtonText(addCardPopup.buttonText);
+const apiFinallyHandler = (popup) =>
+  popup.setButtonText(popup.buttonText);
 
 const userInfo = new UserInfo(userInfoSettings);
 
@@ -69,7 +69,7 @@ const avatarPopup = new PopupWithForm({
         avatarPopup.close();
       })
       .catch(apiCatchHandler)
-      .finally(apiFinallyHandler);
+      .finally(() => apiFinallyHandler(avatarPopup));
   },
 });
 
@@ -107,7 +107,7 @@ function initAddCard(cardsSection, createCard, userId) {
           addCardPopup.close();
         })
         .catch(apiCatchHandler)
-        .finally(apiFinallyHandler);
+        .finally(() => apiFinallyHandler(addCardPopup));
     },
   });
 
@@ -124,13 +124,12 @@ function initEditProfile() {
    * @param {object} inputValues
    * @returns {Promise}
    */
-  const updateProfile = (inputValues) => {
-    return aroundClient
+  const updateProfile = (inputValues) =>
+    aroundClient
       .patchProfile(inputValues)
       .then((data) => userInfo.setUserInfo(data))
       .catch(apiCatchHandler)
-      .finally(apiFinallyHandler);
-  };
+      .finally(() => apiFinallyHandler(editProfilePopup));
 
   const editProfileButton = document.querySelector(".profile__edit-button");
   editProfileButton.addEventListener("click", () => {
@@ -149,7 +148,7 @@ function initEditProfile() {
           editProfilePopup.close();
         })
         .catch(apiCatchHandler)
-        .finally(apiFinallyHandler);
+        .finally(() => apiFinallyHandler(editProfilePopup));
     },
   });
 }
